@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, redirect, url_for
 from flask_login import LoginManager
 from config import Config
 from models import db, User
@@ -22,7 +22,12 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
     
-    app.register_blueprint(vehi_log_bp)
+    app.register_blueprint(vehi_log_bp, url_prefix='/vehi_log')
+    
+    # Root route redirect
+    @app.route('/')
+    def root():
+        return redirect(url_for('vehi_log.vehi_log_index'))
     
     with app.app_context():
         db.create_all()
