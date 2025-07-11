@@ -15,7 +15,20 @@
                     <div class="row">
                         {% for vehicle in vehicles %}
                         <div class="col-md-6 mb-3">
-                            <div class="card">
+                            <div class="card position-relative">
+                                <div class="dropdown position-absolute top-0 end-0 m-2">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ url_for('vehi_log.vehi_log_edit_vehicle', id=vehicle.id) }}">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a></li>
+                                        <li><a class="dropdown-item text-danger" href="#" onclick="confirmDeleteVehicle({{ vehicle.id }}, '{{ vehicle.registration_number }}')">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </a></li>
+                                    </ul>
+                                </div>
                                 <div class="card-body">
                                     <h6 class="card-title">{{ vehicle.registration_number }}</h6>
                                     <p class="card-text text-muted">

@@ -48,6 +48,45 @@ def vehi_log_vehicle_detail(id):
     total_expenses = sum(expense.amount for expense in expenses)
     return render_template('vehi_log_vehicle_detail.html', vehicle=vehicle, expenses=expenses, total_expenses=total_expenses)
 
+@vehi_log_bp.route('/vehicles/<int:id>/edit', methods=['GET', 'POST'])
+def vehi_log_edit_vehicle(id):
+    vehicle = Vehicle.query.get_or_404(id)
+    form = VehicleForm(obj=vehicle)
+    
+    if request.method == 'GET':
+        # Pre-populate form with existing data
+        form.purchase_date.data = vehicle.purchase_date.strftime('%d/%m/%Y')
+    
+    if form.validate_on_submit():
+        # Convert string date to datetime object
+        purchase_date = datetime.strptime(form.purchase_date.data, '%d/%m/%Y').date()
+        
+        vehicle.registration_number = form.registration_number.data
+        vehicle.make = form.make.data
+        vehicle.model = form.model.data
+        vehicle.year = form.year.data
+        vehicle.vehicle_type = form.vehicle_type.data
+        vehicle.fuel_type = form.fuel_type.data
+        vehicle.purchase_date = purchase_date
+        vehicle.purchase_price = form.purchase_price.data
+        
+        db.session.commit()
+        flash('Vehicle updated successfully!', 'success')
+        return redirect(url_for('vehi_log.vehi_log_vehicle_detail', id=id))
+    
+    return render_template('vehi_log_edit_vehicle.html', form=form, vehicle=vehicle)
+
+@vehi_log_bp.route('/vehicles/<int:id>/delete', methods=['POST'])
+def vehi_log_delete_vehicle(id):
+    vehicle = Vehicle.query.get_or_404(id)
+    
+    # Delete the vehicle (expenses will be deleted automatically due to cascade)
+    db.session.delete(vehicle)
+    db.session.commit()
+    
+    flash(f'Vehicle {vehicle.registration_number} deleted successfully!', 'success')
+    return redirect(url_for('vehi_log.vehi_log_vehicles'))
+
 @vehi_log_bp.route('/expenses')
 def vehi_log_expenses():
     expenses = Expense.query.order_by(Expense.expense_date.desc()).all()

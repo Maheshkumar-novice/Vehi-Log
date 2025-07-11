@@ -96,9 +96,37 @@ function vehiLogCalculateTotal(expenses) {
     return expenses.reduce((total, expense) => total + parseFloat(expense.amount), 0);
 }
 
+// Vehicle delete confirmation
+function confirmDeleteVehicle(vehicleId, registrationNumber) {
+    const confirmMessage = `Are you sure you want to delete vehicle "${registrationNumber}"?\n\nThis will permanently delete:\n• Vehicle details\n• All associated expenses\n• All expense records\n\nThis action cannot be undone.`;
+    
+    if (confirm(confirmMessage)) {
+        // Create a form and submit it as POST request
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/vehicles/${vehicleId}/delete`;
+        
+        // Add CSRF token if available
+        const csrfToken = document.querySelector('meta[name="csrf-token"]');
+        if (csrfToken) {
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrf_token';
+            csrfInput.value = csrfToken.getAttribute('content');
+            form.appendChild(csrfInput);
+        }
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
 // Export functions for global use
 window.vehiLog = {
     validateForm: vehiLogValidateForm,
     formatCurrency: vehiLogFormatCurrency,
     calculateTotal: vehiLogCalculateTotal
 };
+
+// Make confirmDeleteVehicle available globally
+window.confirmDeleteVehicle = confirmDeleteVehicle;
