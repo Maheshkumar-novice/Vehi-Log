@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-8">
         <div class="card">
             <div class="card-header">
                 <h5 class="mb-0"><i class="fas fa-edit"></i> Edit Vehicle - {{ vehicle.registration_number }}</h5>
@@ -13,405 +13,403 @@
                 <form method="POST">
                     {{ form.hidden_tag() }}
                     
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" id="vehicleTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
-                                <i class="fas fa-car"></i> Basic Details
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="rc-tab" data-bs-toggle="tab" data-bs-target="#rc" type="button" role="tab" aria-controls="rc" aria-selected="false">
-                                <i class="fas fa-id-card"></i> RC Details
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="insurance-tab" data-bs-toggle="tab" data-bs-target="#insurance" type="button" role="tab" aria-controls="insurance" aria-selected="false">
-                                <i class="fas fa-shield-alt"></i> Insurance
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="owner-tab" data-bs-toggle="tab" data-bs-target="#owner" type="button" role="tab" aria-controls="owner" aria-selected="false">
-                                <i class="fas fa-user"></i> Owner Details
-                            </button>
-                        </li>
-                    </ul>
-
-                    <!-- Tab content -->
-                    <div class="tab-content" id="vehicleTabsContent">
-                        <!-- Basic Details Tab -->
-                        <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.registration_number.label(class="form-label") }}
-                                            {{ form.registration_number(class="form-control") }}
-                                            {% if form.registration_number.errors %}
-                                                <div class="text-danger">{{ form.registration_number.errors[0] }}</div>
-                                            {% endif %}
-                                            <div class="form-text">Format: TN##XX#### (e.g., TN01AA1234)</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.vehicle_type.label(class="form-label") }}
-                                            {{ form.vehicle_type(class="form-select") }}
-                                            {% if form.vehicle_type.errors %}
-                                                <div class="text-danger">{{ form.vehicle_type.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.make.label(class="form-label") }}
-                                            {{ form.make(class="form-control") }}
-                                            {% if form.make.errors %}
-                                                <div class="text-danger">{{ form.make.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.model.label(class="form-label") }}
-                                            {{ form.model(class="form-control") }}
-                                            {% if form.model.errors %}
-                                                <div class="text-danger">{{ form.model.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.year.label(class="form-label") }}
-                                            {{ form.year(class="form-control") }}
-                                            {% if form.year.errors %}
-                                                <div class="text-danger">{{ form.year.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.fuel_type.label(class="form-label") }}
-                                            {{ form.fuel_type(class="form-select") }}
-                                            {% if form.fuel_type.errors %}
-                                                <div class="text-danger">{{ form.fuel_type.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.purchase_date.label(class="form-label") }}
-                                            {{ form.purchase_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
-                                            {% if form.purchase_date.errors %}
-                                                <div class="text-danger">{{ form.purchase_date.errors[0] }}</div>
-                                            {% endif %}
-                                            <div class="form-text">Format: dd/mm/yyyy (e.g., 15/08/2023)</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.purchase_price.label(class="form-label") }}
-                                            {{ form.purchase_price(class="form-control") }}
-                                            {% if form.purchase_price.errors %}
-                                                <div class="text-danger">{{ form.purchase_price.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- RC Details Tab -->
-                        <div class="tab-pane fade" id="rc" role="tabpanel" aria-labelledby="rc-tab">
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.engine_number.label(class="form-label") }}
-                                            {{ form.engine_number(class="form-control") }}
-                                            {% if form.engine_number.errors %}
-                                                <div class="text-danger">{{ form.engine_number.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.chassis_number.label(class="form-label") }}
-                                            {{ form.chassis_number(class="form-control") }}
-                                            {% if form.chassis_number.errors %}
-                                                <div class="text-danger">{{ form.chassis_number.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.registration_date.label(class="form-label") }}
-                                            {{ form.registration_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
-                                            {% if form.registration_date.errors %}
-                                                <div class="text-danger">{{ form.registration_date.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.rto_office.label(class="form-label") }}
-                                            {{ form.rto_office(class="form-select") }}
-                                            {% if form.rto_office.errors %}
-                                                <div class="text-danger">{{ form.rto_office.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.rc_expiry_date.label(class="form-label") }}
-                                            {{ form.rc_expiry_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
-                                            {% if form.rc_expiry_date.errors %}
-                                                <div class="text-danger">{{ form.rc_expiry_date.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.seating_capacity.label(class="form-label") }}
-                                            {{ form.seating_capacity(class="form-control") }}
-                                            {% if form.seating_capacity.errors %}
-                                                <div class="text-danger">{{ form.seating_capacity.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.unladen_weight.label(class="form-label") }}
-                                            {{ form.unladen_weight(class="form-control") }}
-                                            {% if form.unladen_weight.errors %}
-                                                <div class="text-danger">{{ form.unladen_weight.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.gross_vehicle_weight.label(class="form-label") }}
-                                            {{ form.gross_vehicle_weight(class="form-control") }}
-                                            {% if form.gross_vehicle_weight.errors %}
-                                                <div class="text-danger">{{ form.gross_vehicle_weight.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Insurance Tab -->
-                        <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.insurance_company.label(class="form-label") }}
-                                            {{ form.insurance_company(class="form-control") }}
-                                            {% if form.insurance_company.errors %}
-                                                <div class="text-danger">{{ form.insurance_company.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.policy_number.label(class="form-label") }}
-                                            {{ form.policy_number(class="form-control") }}
-                                            {% if form.policy_number.errors %}
-                                                <div class="text-danger">{{ form.policy_number.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.policy_type.label(class="form-label") }}
-                                            {{ form.policy_type(class="form-select") }}
-                                            {% if form.policy_type.errors %}
-                                                <div class="text-danger">{{ form.policy_type.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.premium_amount.label(class="form-label") }}
-                                            {{ form.premium_amount(class="form-control") }}
-                                            {% if form.premium_amount.errors %}
-                                                <div class="text-danger">{{ form.premium_amount.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.insurance_start_date.label(class="form-label") }}
-                                            {{ form.insurance_start_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
-                                            {% if form.insurance_start_date.errors %}
-                                                <div class="text-danger">{{ form.insurance_start_date.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.insurance_expiry_date.label(class="form-label") }}
-                                            {{ form.insurance_expiry_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
-                                            {% if form.insurance_expiry_date.errors %}
-                                                <div class="text-danger">{{ form.insurance_expiry_date.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.agent_name.label(class="form-label") }}
-                                            {{ form.agent_name(class="form-control") }}
-                                            {% if form.agent_name.errors %}
-                                                <div class="text-danger">{{ form.agent_name.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.agent_contact.label(class="form-label") }}
-                                            {{ form.agent_contact(class="form-control") }}
-                                            {% if form.agent_contact.errors %}
-                                                <div class="text-danger">{{ form.agent_contact.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.idv_amount.label(class="form-label") }}
-                                            {{ form.idv_amount(class="form-control") }}
-                                            {% if form.idv_amount.errors %}
-                                                <div class="text-danger">{{ form.idv_amount.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Owner Details Tab -->
-                        <div class="tab-pane fade" id="owner" role="tabpanel" aria-labelledby="owner-tab">
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.owner_name.label(class="form-label") }}
-                                            {{ form.owner_name(class="form-control") }}
-                                            {% if form.owner_name.errors %}
-                                                <div class="text-danger">{{ form.owner_name.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.owner_father_name.label(class="form-label") }}
-                                            {{ form.owner_father_name(class="form-control") }}
-                                            {% if form.owner_father_name.errors %}
-                                                <div class="text-danger">{{ form.owner_father_name.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.owner_phone.label(class="form-label") }}
-                                            {{ form.owner_phone(class="form-control") }}
-                                            {% if form.owner_phone.errors %}
-                                                <div class="text-danger">{{ form.owner_phone.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.owner_email.label(class="form-label") }}
-                                            {{ form.owner_email(class="form-control") }}
-                                            {% if form.owner_email.errors %}
-                                                <div class="text-danger">{{ form.owner_email.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.owner_dob.label(class="form-label") }}
-                                            {{ form.owner_dob(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
-                                            {% if form.owner_dob.errors %}
-                                                <div class="text-danger">{{ form.owner_dob.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.driving_license_number.label(class="form-label") }}
-                                            {{ form.driving_license_number(class="form-control") }}
-                                            {% if form.driving_license_number.errors %}
-                                                <div class="text-danger">{{ form.driving_license_number.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="mb-3">
-                                            {{ form.dl_expiry_date.label(class="form-label") }}
-                                            {{ form.dl_expiry_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
-                                            {% if form.dl_expiry_date.errors %}
-                                                <div class="text-danger">{{ form.dl_expiry_date.errors[0] }}</div>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
+                    <!-- Basic Vehicle Details -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-car text-primary"></i> Basic Vehicle Details
+                        </h6>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
                                 <div class="mb-3">
-                                    {{ form.owner_address.label(class="form-label") }}
-                                    {{ form.owner_address(class="form-control") }}
-                                    {% if form.owner_address.errors %}
-                                        <div class="text-danger">{{ form.owner_address.errors[0] }}</div>
+                                    {{ form.registration_number.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.registration_number(class="form-control") }}
+                                    {% if form.registration_number.errors %}
+                                        <div class="text-danger">{{ form.registration_number.errors[0] }}</div>
+                                    {% endif %}
+                                    <div class="form-text">Format: TN##XX#### (e.g., TN01AA1234)</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.vehicle_type.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.vehicle_type(class="form-select") }}
+                                    {% if form.vehicle_type.errors %}
+                                        <div class="text-danger">{{ form.vehicle_type.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.make.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.make(class="form-control") }}
+                                    {% if form.make.errors %}
+                                        <div class="text-danger">{{ form.make.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.model.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.model(class="form-control") }}
+                                    {% if form.model.errors %}
+                                        <div class="text-danger">{{ form.model.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.year.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.year(class="form-control") }}
+                                    {% if form.year.errors %}
+                                        <div class="text-danger">{{ form.year.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.fuel_type.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.fuel_type(class="form-select") }}
+                                    {% if form.fuel_type.errors %}
+                                        <div class="text-danger">{{ form.fuel_type.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.purchase_date.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.purchase_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                    {% if form.purchase_date.errors %}
+                                        <div class="text-danger">{{ form.purchase_date.errors[0] }}</div>
+                                    {% endif %}
+                                    <div class="form-text">Format: dd/mm/yyyy (e.g., 15/08/2023)</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.purchase_price.label(class="form-label") }}
+                                    <span class="text-danger">*</span>
+                                    {{ form.purchase_price(class="form-control") }}
+                                    {% if form.purchase_price.errors %}
+                                        <div class="text-danger">{{ form.purchase_price.errors[0] }}</div>
                                     {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-4 d-flex justify-content-between">
+                    <!-- RC Details -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-id-card text-info"></i> RC Details <small class="text-muted">(Optional)</small>
+                        </h6>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.engine_number.label(class="form-label") }}
+                                    {{ form.engine_number(class="form-control") }}
+                                    {% if form.engine_number.errors %}
+                                        <div class="text-danger">{{ form.engine_number.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.chassis_number.label(class="form-label") }}
+                                    {{ form.chassis_number(class="form-control") }}
+                                    {% if form.chassis_number.errors %}
+                                        <div class="text-danger">{{ form.chassis_number.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.registration_date.label(class="form-label") }}
+                                    {{ form.registration_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                    {% if form.registration_date.errors %}
+                                        <div class="text-danger">{{ form.registration_date.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.rto_office.label(class="form-label") }}
+                                    {{ form.rto_office(class="form-select") }}
+                                    {% if form.rto_office.errors %}
+                                        <div class="text-danger">{{ form.rto_office.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.rc_expiry_date.label(class="form-label") }}
+                                    {{ form.rc_expiry_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                    {% if form.rc_expiry_date.errors %}
+                                        <div class="text-danger">{{ form.rc_expiry_date.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.seating_capacity.label(class="form-label") }}
+                                    {{ form.seating_capacity(class="form-control") }}
+                                    {% if form.seating_capacity.errors %}
+                                        <div class="text-danger">{{ form.seating_capacity.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.unladen_weight.label(class="form-label") }}
+                                    {{ form.unladen_weight(class="form-control") }}
+                                    {% if form.unladen_weight.errors %}
+                                        <div class="text-danger">{{ form.unladen_weight.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.gross_vehicle_weight.label(class="form-label") }}
+                                    {{ form.gross_vehicle_weight(class="form-control") }}
+                                    {% if form.gross_vehicle_weight.errors %}
+                                        <div class="text-danger">{{ form.gross_vehicle_weight.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insurance Details -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-shield-alt text-success"></i> Insurance Details <small class="text-muted">(Optional)</small>
+                        </h6>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.insurance_company.label(class="form-label") }}
+                                    {{ form.insurance_company(class="form-control") }}
+                                    {% if form.insurance_company.errors %}
+                                        <div class="text-danger">{{ form.insurance_company.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.policy_number.label(class="form-label") }}
+                                    {{ form.policy_number(class="form-control") }}
+                                    {% if form.policy_number.errors %}
+                                        <div class="text-danger">{{ form.policy_number.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.policy_type.label(class="form-label") }}
+                                    {{ form.policy_type(class="form-select") }}
+                                    {% if form.policy_type.errors %}
+                                        <div class="text-danger">{{ form.policy_type.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.premium_amount.label(class="form-label") }}
+                                    {{ form.premium_amount(class="form-control") }}
+                                    {% if form.premium_amount.errors %}
+                                        <div class="text-danger">{{ form.premium_amount.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.insurance_start_date.label(class="form-label") }}
+                                    {{ form.insurance_start_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                    {% if form.insurance_start_date.errors %}
+                                        <div class="text-danger">{{ form.insurance_start_date.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.insurance_expiry_date.label(class="form-label") }}
+                                    {{ form.insurance_expiry_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                    {% if form.insurance_expiry_date.errors %}
+                                        <div class="text-danger">{{ form.insurance_expiry_date.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.agent_name.label(class="form-label") }}
+                                    {{ form.agent_name(class="form-control") }}
+                                    {% if form.agent_name.errors %}
+                                        <div class="text-danger">{{ form.agent_name.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.agent_contact.label(class="form-label") }}
+                                    {{ form.agent_contact(class="form-control") }}
+                                    {% if form.agent_contact.errors %}
+                                        <div class="text-danger">{{ form.agent_contact.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.idv_amount.label(class="form-label") }}
+                                    {{ form.idv_amount(class="form-control") }}
+                                    {% if form.idv_amount.errors %}
+                                        <div class="text-danger">{{ form.idv_amount.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Owner Details -->
+                    <div class="mb-4">
+                        <h6 class="border-bottom pb-2 mb-3">
+                            <i class="fas fa-user text-warning"></i> Owner Details <small class="text-muted">(Optional)</small>
+                        </h6>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.owner_name.label(class="form-label") }}
+                                    {{ form.owner_name(class="form-control") }}
+                                    {% if form.owner_name.errors %}
+                                        <div class="text-danger">{{ form.owner_name.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.owner_father_name.label(class="form-label") }}
+                                    {{ form.owner_father_name(class="form-control") }}
+                                    {% if form.owner_father_name.errors %}
+                                        <div class="text-danger">{{ form.owner_father_name.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.owner_phone.label(class="form-label") }}
+                                    {{ form.owner_phone(class="form-control") }}
+                                    {% if form.owner_phone.errors %}
+                                        <div class="text-danger">{{ form.owner_phone.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.owner_email.label(class="form-label") }}
+                                    {{ form.owner_email(class="form-control") }}
+                                    {% if form.owner_email.errors %}
+                                        <div class="text-danger">{{ form.owner_email.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.owner_dob.label(class="form-label") }}
+                                    {{ form.owner_dob(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                    {% if form.owner_dob.errors %}
+                                        <div class="text-danger">{{ form.owner_dob.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.driving_license_number.label(class="form-label") }}
+                                    {{ form.driving_license_number(class="form-control") }}
+                                    {% if form.driving_license_number.errors %}
+                                        <div class="text-danger">{{ form.driving_license_number.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    {{ form.dl_expiry_date.label(class="form-label") }}
+                                    {{ form.dl_expiry_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                    {% if form.dl_expiry_date.errors %}
+                                        <div class="text-danger">{{ form.dl_expiry_date.errors[0] }}</div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form.owner_address.label(class="form-label") }}
+                            {{ form.owner_address(class="form-control") }}
+                            {% if form.owner_address.errors %}
+                                <div class="text-danger">{{ form.owner_address.errors[0] }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="d-flex justify-content-between">
                         <a href="{{ url_for('vehi_log.vehi_log_vehicle_detail', id=vehicle.id) }}" class="btn btn-secondary">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Update Vehicle</button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Update Vehicle
+                        </button>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            <span class="text-danger">*</span> Required fields
+                        </small>
                     </div>
                 </form>
             </div>

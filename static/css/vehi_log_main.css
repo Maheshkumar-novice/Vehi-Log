@@ -164,6 +164,157 @@
     z-index: 10;
 }
 
+/* Vehicle Detail Tabs */
+.vehi-log-vehicle-header {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border-radius: 8px 8px 0 0;
+    padding: 20px;
+    margin-bottom: 0;
+}
+
+.vehi-log-vehicle-header h4 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.vehi-log-vehicle-header .text-muted {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.vehi-log-tabs {
+    border-bottom: none;
+    background-color: #f8f9fa;
+    padding: 0 15px;
+}
+
+.vehi-log-tabs .nav-link {
+    border: none;
+    border-radius: 0;
+    padding: 15px 20px;
+    color: #6c757d;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.vehi-log-tabs .nav-link:hover {
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+}
+
+.vehi-log-tabs .nav-link.active {
+    color: #007bff;
+    background-color: white;
+    border-bottom: 3px solid #007bff;
+    font-weight: 600;
+}
+
+.vehi-log-tabs .nav-link i {
+    font-size: 1.1em;
+}
+
+.vehi-log-tabs .badge {
+    font-size: 0.7em;
+    padding: 2px 6px;
+}
+
+.vehi-log-tab-content {
+    padding: 30px 20px;
+    background-color: white;
+    border-radius: 0 0 8px 8px;
+}
+
+.vehi-log-tab-section {
+    margin-bottom: 30px;
+}
+
+.vehi-log-tab-section:last-child {
+    margin-bottom: 0;
+}
+
+.vehi-log-tab-section h6 {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.vehi-log-tab-section h6 i {
+    margin-right: 8px;
+}
+
+.vehi-log-expiry-warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.vehi-log-expiry-warning h6 {
+    color: #856404;
+    margin-bottom: 10px;
+}
+
+.vehi-log-expiry-warning ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.vehi-log-expiry-warning li {
+    color: #856404;
+    margin-bottom: 5px;
+}
+
+/* Mobile-specific tab styles */
+@media (max-width: 768px) {
+    .vehi-log-tabs .nav-link {
+        padding: 12px 8px;
+        font-size: 0.9rem;
+        flex-direction: column;
+        text-align: center;
+        min-width: 0;
+    }
+    
+    .vehi-log-tabs .nav-link span {
+        display: none;
+    }
+    
+    .vehi-log-tabs .nav-link i {
+        font-size: 1.2em;
+        margin-bottom: 4px;
+    }
+    
+    .vehi-log-tab-content {
+        padding: 20px 15px;
+    }
+    
+    .vehi-log-tab-section h6 {
+        font-size: 1rem;
+    }
+    
+    .vehi-log-vehicle-header {
+        text-align: center;
+    }
+    
+    .vehi-log-vehicle-header .btn {
+        margin: 5px;
+    }
+    
+    .table-responsive {
+        font-size: 0.875rem;
+    }
+    
+    .table-responsive th,
+    .table-responsive td {
+        padding: 8px 4px;
+    }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .vehi-log-container {

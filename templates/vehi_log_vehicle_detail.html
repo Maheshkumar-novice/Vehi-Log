@@ -3,132 +3,455 @@
 {% block title %}{{ vehicle.registration_number }} - VehiLog{% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0"><i class="fas fa-car"></i> Vehicle Details</h5>
-                <div class="dropdown">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ url_for('vehi_log.vehi_log_edit_vehicle', id=vehicle.id) }}">
-                            <i class="fas fa-edit"></i> Edit Vehicle
-                        </a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#" onclick="confirmDeleteVehicle({{ vehicle.id }}, '{{ vehicle.registration_number }}')">
-                            <i class="fas fa-trash"></i> Delete Vehicle
-                        </a></li>
-                    </ul>
+<div class="container-fluid">
+    <!-- Vehicle Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                    <div class="mb-2 mb-md-0">
+                        <h4 class="mb-1"><i class="fas fa-car text-primary"></i> {{ vehicle.registration_number }}</h4>
+                        <p class="text-muted mb-0">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})</p>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <a href="{{ url_for('vehi_log.vehi_log_edit_vehicle', id=vehicle.id) }}" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-edit"></i> <span class="d-none d-sm-inline">Edit</span>
+                        </a>
+                        <button class="btn btn-outline-danger btn-sm" onclick="confirmDeleteVehicle({{ vehicle.id }}, '{{ vehicle.registration_number }}')">
+                            <i class="fas fa-trash"></i> <span class="d-none d-sm-inline">Delete</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <h4>{{ vehicle.registration_number }}</h4>
-                <p class="text-muted">{{ vehicle.make }} {{ vehicle.model }}</p>
-                
-                <table class="table table-sm">
-                    <tr>
-                        <td><strong>Year:</strong></td>
-                        <td>{{ vehicle.year }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Type:</strong></td>
-                        <td><span class="badge bg-info">{{ vehicle.vehicle_type }}</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Fuel:</strong></td>
-                        <td>{{ vehicle.fuel_type }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Purchase Date:</strong></td>
-                        <td>{{ vehicle.purchase_date.strftime('%d/%m/%Y') }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Purchase Price:</strong></td>
-                        <td>₹{{ "%.2f"|format(vehicle.purchase_price) }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Added to App:</strong></td>
-                        <td>{{ vehicle.created_at.strftime('%d/%m/%Y') }}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Total Expenses:</strong></td>
-                        <td class="text-danger">₹{{ "%.2f"|format(total_expenses) }}</td>
-                    </tr>
-                </table>
             </div>
         </div>
     </div>
-    
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0"><i class="fas fa-receipt"></i> Expense History</h5>
-                <a href="{{ url_for('vehi_log.vehi_log_add_expense') }}" class="btn btn-primary btn-sm">
-                    <i class="fas fa-plus"></i> Add Expense
-                </a>
-            </div>
-            <div class="card-body">
-                {% if expenses %}
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Category</th>
-                                    <th>Amount</th>
-                                    <th>Description</th>
-                                    <th>Vendor</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for expense in expenses %}
-                                <tr>
-                                    <td>{{ expense.expense_date.strftime('%d/%m/%Y') }}</td>
-                                    <td><span class="badge bg-secondary">{{ expense.category.name }}</span></td>
-                                    <td>₹{{ "%.2f"|format(expense.amount) }}</td>
-                                    <td>{{ expense.description }}</td>
-                                    <td>{{ expense.vendor_name or '-' }}</td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="{{ url_for('vehi_log.vehi_log_edit_expense', id=expense.id) }}">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a></li>
-                                                <li><a class="dropdown-item text-danger" href="#" onclick="confirmDeleteExpense({{ expense.id }}, '{{ expense.description|truncate(30) }}', '{{ "%.2f"|format(expense.amount) }}')">
-                                                    <i class="fas fa-trash"></i> Delete
-                                                </a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                {% else %}
-                    <div class="text-center text-muted py-4">
-                        <i class="fas fa-receipt fa-3x mb-3"></i>
-                        <p>No expenses recorded for this vehicle yet.</p>
-                        <a href="{{ url_for('vehi_log.vehi_log_add_expense') }}" class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Add First Expense
-                        </a>
-                    </div>
-                {% endif %}
-                
-                {% if expenses %}
-                <div class="alert alert-info mt-3">
-                    <i class="fas fa-info-circle"></i> 
-                    <strong>Note:</strong> Expense tracking started from {{ vehicle.created_at.strftime('%d/%m/%Y') }} when this vehicle was added to the app.
+
+    <!-- Tabbed Content -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header p-0">
+                    <ul class="nav nav-tabs card-header-tabs" id="vehicleTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="basic-tab" data-bs-toggle="tab" data-bs-target="#basic" type="button" role="tab" aria-controls="basic" aria-selected="true">
+                                <i class="fas fa-info-circle"></i> <span class="d-none d-sm-inline">Basic</span>
+                            </button>
+                        </li>
+                        {% if vehicle.engine_number or vehicle.chassis_number or vehicle.registration_date or vehicle.rto_office or vehicle.rc_expiry_date or vehicle.seating_capacity or vehicle.unladen_weight or vehicle.gross_vehicle_weight %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="rc-tab" data-bs-toggle="tab" data-bs-target="#rc" type="button" role="tab" aria-controls="rc" aria-selected="false">
+                                <i class="fas fa-id-card"></i> <span class="d-none d-sm-inline">RC Details</span>
+                                {% if vehicle.rc_expiry_date %}
+                                    {% set days_to_expiry = (vehicle.rc_expiry_date - vehicle.rc_expiry_date.today()).days %}
+                                    {% if days_to_expiry <= 30 %}
+                                        <span class="badge bg-warning ms-1">!</span>
+                                    {% endif %}
+                                {% endif %}
+                            </button>
+                        </li>
+                        {% endif %}
+                        {% if vehicle.insurance_company or vehicle.policy_number or vehicle.policy_type or vehicle.insurance_start_date or vehicle.insurance_expiry_date or vehicle.premium_amount or vehicle.agent_name or vehicle.agent_contact or vehicle.idv_amount %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="insurance-tab" data-bs-toggle="tab" data-bs-target="#insurance" type="button" role="tab" aria-controls="insurance" aria-selected="false">
+                                <i class="fas fa-shield-alt"></i> <span class="d-none d-sm-inline">Insurance</span>
+                                {% if vehicle.insurance_expiry_date %}
+                                    {% set days_to_expiry = (vehicle.insurance_expiry_date - vehicle.insurance_expiry_date.today()).days %}
+                                    {% if days_to_expiry <= 30 %}
+                                        <span class="badge bg-danger ms-1">!</span>
+                                    {% endif %}
+                                {% endif %}
+                            </button>
+                        </li>
+                        {% endif %}
+                        {% if vehicle.owner_name or vehicle.owner_father_name or vehicle.owner_address or vehicle.owner_phone or vehicle.owner_email or vehicle.owner_dob or vehicle.driving_license_number or vehicle.dl_expiry_date %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="owner-tab" data-bs-toggle="tab" data-bs-target="#owner" type="button" role="tab" aria-controls="owner" aria-selected="false">
+                                <i class="fas fa-user"></i> <span class="d-none d-sm-inline">Owner</span>
+                                {% if vehicle.dl_expiry_date %}
+                                    {% set days_to_expiry = (vehicle.dl_expiry_date - vehicle.dl_expiry_date.today()).days %}
+                                    {% if days_to_expiry <= 30 %}
+                                        <span class="badge bg-warning ms-1">!</span>
+                                    {% endif %}
+                                {% endif %}
+                            </button>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="expenses-tab" data-bs-toggle="tab" data-bs-target="#expenses" type="button" role="tab" aria-controls="expenses" aria-selected="false">
+                                <i class="fas fa-receipt"></i> <span class="d-none d-sm-inline">Expenses</span>
+                                {% if expenses %}
+                                    <span class="badge bg-secondary ms-1">{{ expenses|length }}</span>
+                                {% endif %}
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-                {% endif %}
+                <div class="card-body">
+                    <div class="tab-content" id="vehicleTabsContent">
+                        <!-- Basic Info Tab -->
+                        <div class="tab-pane fade show active" id="basic" role="tabpanel" aria-labelledby="basic-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <td><strong>Registration Number:</strong></td>
+                                            <td>{{ vehicle.registration_number }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Make & Model:</strong></td>
+                                            <td>{{ vehicle.make }} {{ vehicle.model }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Year:</strong></td>
+                                            <td>{{ vehicle.year }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Vehicle Type:</strong></td>
+                                            <td><span class="badge bg-info">{{ vehicle.vehicle_type }}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Fuel Type:</strong></td>
+                                            <td>{{ vehicle.fuel_type }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <td><strong>Purchase Date:</strong></td>
+                                            <td>{{ vehicle.purchase_date.strftime('%d/%m/%Y') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Purchase Price:</strong></td>
+                                            <td>₹{{ "%.2f"|format(vehicle.purchase_price) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Added to App:</strong></td>
+                                            <td>{{ vehicle.created_at.strftime('%d/%m/%Y') }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Expenses:</strong></td>
+                                            <td class="text-danger">₹{{ "%.2f"|format(total_expenses) }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Total Investment:</strong></td>
+                                            <td class="text-primary">₹{{ "%.2f"|format(vehicle.purchase_price + total_expenses) }}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RC Details Tab -->
+                        {% if vehicle.engine_number or vehicle.chassis_number or vehicle.registration_date or vehicle.rto_office or vehicle.rc_expiry_date or vehicle.seating_capacity or vehicle.unladen_weight or vehicle.gross_vehicle_weight %}
+                        <div class="tab-pane fade" id="rc" role="tabpanel" aria-labelledby="rc-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-3"><i class="fas fa-certificate"></i> Registration Details</h6>
+                                    <table class="table table-sm">
+                                        {% if vehicle.engine_number %}
+                                        <tr>
+                                            <td><strong>Engine Number:</strong></td>
+                                            <td>{{ vehicle.engine_number }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.chassis_number %}
+                                        <tr>
+                                            <td><strong>Chassis Number:</strong></td>
+                                            <td>{{ vehicle.chassis_number }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.registration_date %}
+                                        <tr>
+                                            <td><strong>Registration Date:</strong></td>
+                                            <td>{{ vehicle.registration_date.strftime('%d/%m/%Y') }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.rto_office %}
+                                        <tr>
+                                            <td><strong>RTO Office:</strong></td>
+                                            <td><span class="badge bg-secondary">{{ vehicle.rto_office }}</span></td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.rc_expiry_date %}
+                                        <tr>
+                                            <td><strong>RC Expiry Date:</strong></td>
+                                            <td>
+                                                {{ vehicle.rc_expiry_date.strftime('%d/%m/%Y') }}
+                                                {% set days_to_expiry = (vehicle.rc_expiry_date - vehicle.rc_expiry_date.today()).days %}
+                                                {% if days_to_expiry <= 30 %}
+                                                    <span class="badge bg-warning ms-1">Expires in {{ days_to_expiry }} days</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-3"><i class="fas fa-weight"></i> Vehicle Specifications</h6>
+                                    <table class="table table-sm">
+                                        {% if vehicle.seating_capacity %}
+                                        <tr>
+                                            <td><strong>Seating Capacity:</strong></td>
+                                            <td>{{ vehicle.seating_capacity }} persons</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.unladen_weight %}
+                                        <tr>
+                                            <td><strong>Unladen Weight:</strong></td>
+                                            <td>{{ vehicle.unladen_weight }} kg</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.gross_vehicle_weight %}
+                                        <tr>
+                                            <td><strong>Gross Vehicle Weight:</strong></td>
+                                            <td>{{ vehicle.gross_vehicle_weight }} kg</td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Insurance Tab -->
+                        {% if vehicle.insurance_company or vehicle.policy_number or vehicle.policy_type or vehicle.insurance_start_date or vehicle.insurance_expiry_date or vehicle.premium_amount or vehicle.agent_name or vehicle.agent_contact or vehicle.idv_amount %}
+                        <div class="tab-pane fade" id="insurance" role="tabpanel" aria-labelledby="insurance-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-3"><i class="fas fa-file-contract"></i> Policy Details</h6>
+                                    <table class="table table-sm">
+                                        {% if vehicle.insurance_company %}
+                                        <tr>
+                                            <td><strong>Insurance Company:</strong></td>
+                                            <td>{{ vehicle.insurance_company }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.policy_number %}
+                                        <tr>
+                                            <td><strong>Policy Number:</strong></td>
+                                            <td>{{ vehicle.policy_number }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.policy_type %}
+                                        <tr>
+                                            <td><strong>Policy Type:</strong></td>
+                                            <td><span class="badge bg-info">{{ vehicle.policy_type }}</span></td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.insurance_start_date %}
+                                        <tr>
+                                            <td><strong>Policy Start Date:</strong></td>
+                                            <td>{{ vehicle.insurance_start_date.strftime('%d/%m/%Y') }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.insurance_expiry_date %}
+                                        <tr>
+                                            <td><strong>Policy Expiry Date:</strong></td>
+                                            <td>
+                                                {{ vehicle.insurance_expiry_date.strftime('%d/%m/%Y') }}
+                                                {% set days_to_expiry = (vehicle.insurance_expiry_date - vehicle.insurance_expiry_date.today()).days %}
+                                                {% if days_to_expiry <= 30 %}
+                                                    <span class="badge bg-danger ms-1">Expires in {{ days_to_expiry }} days</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-3"><i class="fas fa-rupee-sign"></i> Financial Details</h6>
+                                    <table class="table table-sm">
+                                        {% if vehicle.premium_amount %}
+                                        <tr>
+                                            <td><strong>Premium Amount:</strong></td>
+                                            <td>₹{{ "%.2f"|format(vehicle.premium_amount) }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.idv_amount %}
+                                        <tr>
+                                            <td><strong>IDV Amount:</strong></td>
+                                            <td>₹{{ "%.2f"|format(vehicle.idv_amount) }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.agent_name %}
+                                        <tr>
+                                            <td><strong>Agent Name:</strong></td>
+                                            <td>{{ vehicle.agent_name }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.agent_contact %}
+                                        <tr>
+                                            <td><strong>Agent Contact:</strong></td>
+                                            <td><a href="tel:{{ vehicle.agent_contact }}">{{ vehicle.agent_contact }}</a></td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Owner Details Tab -->
+                        {% if vehicle.owner_name or vehicle.owner_father_name or vehicle.owner_address or vehicle.owner_phone or vehicle.owner_email or vehicle.owner_dob or vehicle.driving_license_number or vehicle.dl_expiry_date %}
+                        <div class="tab-pane fade" id="owner" role="tabpanel" aria-labelledby="owner-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-3"><i class="fas fa-user-circle"></i> Personal Details</h6>
+                                    <table class="table table-sm">
+                                        {% if vehicle.owner_name %}
+                                        <tr>
+                                            <td><strong>Owner Name:</strong></td>
+                                            <td>{{ vehicle.owner_name }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.owner_father_name %}
+                                        <tr>
+                                            <td><strong>Father/Husband Name:</strong></td>
+                                            <td>{{ vehicle.owner_father_name }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.owner_dob %}
+                                        <tr>
+                                            <td><strong>Date of Birth:</strong></td>
+                                            <td>{{ vehicle.owner_dob.strftime('%d/%m/%Y') }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.owner_address %}
+                                        <tr>
+                                            <td><strong>Address:</strong></td>
+                                            <td>{{ vehicle.owner_address }}</td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-muted mb-3"><i class="fas fa-phone"></i> Contact & License</h6>
+                                    <table class="table table-sm">
+                                        {% if vehicle.owner_phone %}
+                                        <tr>
+                                            <td><strong>Phone Number:</strong></td>
+                                            <td><a href="tel:{{ vehicle.owner_phone }}">{{ vehicle.owner_phone }}</a></td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.owner_email %}
+                                        <tr>
+                                            <td><strong>Email:</strong></td>
+                                            <td><a href="mailto:{{ vehicle.owner_email }}">{{ vehicle.owner_email }}</a></td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.driving_license_number %}
+                                        <tr>
+                                            <td><strong>Driving License:</strong></td>
+                                            <td>{{ vehicle.driving_license_number }}</td>
+                                        </tr>
+                                        {% endif %}
+                                        {% if vehicle.dl_expiry_date %}
+                                        <tr>
+                                            <td><strong>DL Expiry Date:</strong></td>
+                                            <td>
+                                                {{ vehicle.dl_expiry_date.strftime('%d/%m/%Y') }}
+                                                {% set days_to_expiry = (vehicle.dl_expiry_date - vehicle.dl_expiry_date.today()).days %}
+                                                {% if days_to_expiry <= 30 %}
+                                                    <span class="badge bg-warning ms-1">Expires in {{ days_to_expiry }} days</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endif %}
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        <!-- Expenses Tab -->
+                        <div class="tab-pane fade" id="expenses" role="tabpanel" aria-labelledby="expenses-tab">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h6 class="text-muted mb-0"><i class="fas fa-receipt"></i> Expense History</h6>
+                                <a href="{{ url_for('vehi_log.vehi_log_add_expense') }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-plus"></i> Add Expense
+                                </a>
+                            </div>
+                            
+                            {% if expenses %}
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Date</th>
+                                                <th>Category</th>
+                                                <th>Amount</th>
+                                                <th>Description</th>
+                                                <th class="d-none d-md-table-cell">Vendor</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for expense in expenses %}
+                                            <tr>
+                                                <td>{{ expense.expense_date.strftime('%d/%m/%Y') }}</td>
+                                                <td><span class="badge bg-secondary">{{ expense.category.name }}</span></td>
+                                                <td>₹{{ "%.2f"|format(expense.amount) }}</td>
+                                                <td>{{ expense.description|truncate(30) }}</td>
+                                                <td class="d-none d-md-table-cell">{{ expense.vendor_name or '-' }}</td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                            <i class="fas fa-ellipsis-v"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><a class="dropdown-item" href="{{ url_for('vehi_log.vehi_log_edit_expense', id=expense.id) }}">
+                                                                <i class="fas fa-edit"></i> Edit
+                                                            </a></li>
+                                                            <li><a class="dropdown-item text-danger" href="#" onclick="confirmDeleteExpense({{ expense.id }}, '{{ expense.description|truncate(30) }}', '{{ "%.2f"|format(expense.amount) }}')">
+                                                                <i class="fas fa-trash"></i> Delete
+                                                            </a></li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="alert alert-info mt-3">
+                                    <i class="fas fa-info-circle"></i> 
+                                    <strong>Summary:</strong> {{ expenses|length }} expenses totaling ₹{{ "%.2f"|format(total_expenses) }} since {{ vehicle.created_at.strftime('%d/%m/%Y') }}
+                                </div>
+                            {% else %}
+                                <div class="text-center text-muted py-4">
+                                    <i class="fas fa-receipt fa-3x mb-3"></i>
+                                    <p>No expenses recorded for this vehicle yet.</p>
+                                    <a href="{{ url_for('vehi_log.vehi_log_add_expense') }}" class="btn btn-primary">
+                                        <i class="fas fa-plus"></i> Add First Expense
+                                    </a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Document Expiry Alerts -->
+{% set expired_docs = vehicle.has_expired_documents() %}
+{% if expired_docs %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="alert alert-warning">
+            <h6><i class="fas fa-exclamation-triangle"></i> Document Expiry Alert</h6>
+            <p class="mb-0">The following documents are expiring soon or have expired:</p>
+            <ul class="mb-0 mt-2">
+                {% for doc_type, expiry_date in expired_docs %}
+                <li>{{ doc_type }} - {{ expiry_date.strftime('%d/%m/%Y') }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% endblock %}

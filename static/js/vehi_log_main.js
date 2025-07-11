@@ -104,7 +104,7 @@ function confirmDeleteVehicle(vehicleId, registrationNumber) {
         // Create a form and submit it as POST request
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = `/vehicles/${vehicleId}/delete`;
+        form.action = `/vehi_log/vehicles/${vehicleId}/delete`;
         
         // Add CSRF token if available
         const csrfToken = document.querySelector('meta[name="csrf-token"]');
@@ -136,7 +136,7 @@ function confirmDeleteExpense(expenseId, description, amount) {
         // Create a form and submit it as POST request
         const form = document.createElement('form');
         form.method = 'POST';
-        form.action = `/expenses/${expenseId}/delete`;
+        form.action = `/vehi_log/expenses/${expenseId}/delete`;
         
         // Add CSRF token if available
         const csrfToken = document.querySelector('meta[name="csrf-token"]');

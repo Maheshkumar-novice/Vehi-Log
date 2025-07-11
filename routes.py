@@ -78,28 +78,54 @@ def vehi_log_add_vehicle():
         
         # Handle optional date fields
         registration_date = None
-        if form.registration_date.data:
+        if form.registration_date.data and form.registration_date.data.strip():
             registration_date = datetime.strptime(form.registration_date.data, '%d/%m/%Y').date()
         
         rc_expiry_date = None
-        if form.rc_expiry_date.data:
+        if form.rc_expiry_date.data and form.rc_expiry_date.data.strip():
             rc_expiry_date = datetime.strptime(form.rc_expiry_date.data, '%d/%m/%Y').date()
         
         insurance_start_date = None
-        if form.insurance_start_date.data:
+        if form.insurance_start_date.data and form.insurance_start_date.data.strip():
             insurance_start_date = datetime.strptime(form.insurance_start_date.data, '%d/%m/%Y').date()
         
         insurance_expiry_date = None
-        if form.insurance_expiry_date.data:
+        if form.insurance_expiry_date.data and form.insurance_expiry_date.data.strip():
             insurance_expiry_date = datetime.strptime(form.insurance_expiry_date.data, '%d/%m/%Y').date()
         
         owner_dob = None
-        if form.owner_dob.data:
+        if form.owner_dob.data and form.owner_dob.data.strip():
             owner_dob = datetime.strptime(form.owner_dob.data, '%d/%m/%Y').date()
         
         dl_expiry_date = None
-        if form.dl_expiry_date.data:
+        if form.dl_expiry_date.data and form.dl_expiry_date.data.strip():
             dl_expiry_date = datetime.strptime(form.dl_expiry_date.data, '%d/%m/%Y').date()
+        
+        # Helper function to handle optional string fields
+        def get_optional_string(field_data):
+            return field_data.strip() if field_data and field_data.strip() else None
+        
+        # Helper function to handle optional select fields
+        def get_optional_select(field_data):
+            return field_data if field_data and field_data != '' else None
+        
+        # Helper function to handle optional integer fields
+        def get_optional_integer(field_data):
+            if field_data and str(field_data).strip():
+                try:
+                    return int(field_data)
+                except (ValueError, TypeError):
+                    return None
+            return None
+        
+        # Helper function to handle optional float fields
+        def get_optional_float(field_data):
+            if field_data and str(field_data).strip():
+                try:
+                    return float(field_data)
+                except (ValueError, TypeError):
+                    return None
+            return None
         
         vehicle = Vehicle(
             user_id=current_user.id,
@@ -112,32 +138,32 @@ def vehi_log_add_vehicle():
             purchase_date=purchase_date,
             purchase_price=form.purchase_price.data,
             # RC Details
-            engine_number=form.engine_number.data,
-            chassis_number=form.chassis_number.data,
+            engine_number=get_optional_string(form.engine_number.data),
+            chassis_number=get_optional_string(form.chassis_number.data),
             registration_date=registration_date,
-            rto_office=form.rto_office.data,
+            rto_office=get_optional_select(form.rto_office.data),
             rc_expiry_date=rc_expiry_date,
-            seating_capacity=form.seating_capacity.data,
-            unladen_weight=form.unladen_weight.data,
-            gross_vehicle_weight=form.gross_vehicle_weight.data,
+            seating_capacity=get_optional_integer(form.seating_capacity.data),
+            unladen_weight=get_optional_integer(form.unladen_weight.data),
+            gross_vehicle_weight=get_optional_integer(form.gross_vehicle_weight.data),
             # Insurance Details
-            insurance_company=form.insurance_company.data,
-            policy_number=form.policy_number.data,
-            policy_type=form.policy_type.data,
+            insurance_company=get_optional_string(form.insurance_company.data),
+            policy_number=get_optional_string(form.policy_number.data),
+            policy_type=get_optional_select(form.policy_type.data),
             insurance_start_date=insurance_start_date,
             insurance_expiry_date=insurance_expiry_date,
-            premium_amount=form.premium_amount.data,
-            agent_name=form.agent_name.data,
-            agent_contact=form.agent_contact.data,
-            idv_amount=form.idv_amount.data,
+            premium_amount=get_optional_float(form.premium_amount.data),
+            agent_name=get_optional_string(form.agent_name.data),
+            agent_contact=get_optional_string(form.agent_contact.data),
+            idv_amount=get_optional_float(form.idv_amount.data),
             # Owner Details
-            owner_name=form.owner_name.data,
-            owner_father_name=form.owner_father_name.data,
-            owner_address=form.owner_address.data,
-            owner_phone=form.owner_phone.data,
-            owner_email=form.owner_email.data,
+            owner_name=get_optional_string(form.owner_name.data),
+            owner_father_name=get_optional_string(form.owner_father_name.data),
+            owner_address=get_optional_string(form.owner_address.data),
+            owner_phone=get_optional_string(form.owner_phone.data),
+            owner_email=get_optional_string(form.owner_email.data),
             owner_dob=owner_dob,
-            driving_license_number=form.driving_license_number.data,
+            driving_license_number=get_optional_string(form.driving_license_number.data),
             dl_expiry_date=dl_expiry_date
         )
         db.session.add(vehicle)
@@ -182,27 +208,27 @@ def vehi_log_edit_vehicle(id):
         
         # Handle optional date fields
         registration_date = None
-        if form.registration_date.data:
+        if form.registration_date.data and form.registration_date.data.strip():
             registration_date = datetime.strptime(form.registration_date.data, '%d/%m/%Y').date()
         
         rc_expiry_date = None
-        if form.rc_expiry_date.data:
+        if form.rc_expiry_date.data and form.rc_expiry_date.data.strip():
             rc_expiry_date = datetime.strptime(form.rc_expiry_date.data, '%d/%m/%Y').date()
         
         insurance_start_date = None
-        if form.insurance_start_date.data:
+        if form.insurance_start_date.data and form.insurance_start_date.data.strip():
             insurance_start_date = datetime.strptime(form.insurance_start_date.data, '%d/%m/%Y').date()
         
         insurance_expiry_date = None
-        if form.insurance_expiry_date.data:
+        if form.insurance_expiry_date.data and form.insurance_expiry_date.data.strip():
             insurance_expiry_date = datetime.strptime(form.insurance_expiry_date.data, '%d/%m/%Y').date()
         
         owner_dob = None
-        if form.owner_dob.data:
+        if form.owner_dob.data and form.owner_dob.data.strip():
             owner_dob = datetime.strptime(form.owner_dob.data, '%d/%m/%Y').date()
         
         dl_expiry_date = None
-        if form.dl_expiry_date.data:
+        if form.dl_expiry_date.data and form.dl_expiry_date.data.strip():
             dl_expiry_date = datetime.strptime(form.dl_expiry_date.data, '%d/%m/%Y').date()
         
         # Update basic vehicle details
@@ -215,35 +241,61 @@ def vehi_log_edit_vehicle(id):
         vehicle.purchase_date = purchase_date
         vehicle.purchase_price = form.purchase_price.data
         
+        # Helper function to handle optional string fields
+        def get_optional_string(field_data):
+            return field_data.strip() if field_data and field_data.strip() else None
+        
+        # Helper function to handle optional select fields
+        def get_optional_select(field_data):
+            return field_data if field_data and field_data != '' else None
+        
+        # Helper function to handle optional integer fields
+        def get_optional_integer(field_data):
+            if field_data and str(field_data).strip():
+                try:
+                    return int(field_data)
+                except (ValueError, TypeError):
+                    return None
+            return None
+        
+        # Helper function to handle optional float fields
+        def get_optional_float(field_data):
+            if field_data and str(field_data).strip():
+                try:
+                    return float(field_data)
+                except (ValueError, TypeError):
+                    return None
+            return None
+        
         # Update RC details
-        vehicle.engine_number = form.engine_number.data
-        vehicle.chassis_number = form.chassis_number.data
+        vehicle.engine_number = get_optional_string(form.engine_number.data)
+        vehicle.chassis_number = get_optional_string(form.chassis_number.data)
         vehicle.registration_date = registration_date
-        vehicle.rto_office = form.rto_office.data
+        vehicle.rto_office = get_optional_select(form.rto_office.data)
         vehicle.rc_expiry_date = rc_expiry_date
-        vehicle.seating_capacity = form.seating_capacity.data
-        vehicle.unladen_weight = form.unladen_weight.data
-        vehicle.gross_vehicle_weight = form.gross_vehicle_weight.data
+        vehicle.seating_capacity = get_optional_integer(form.seating_capacity.data)
+        vehicle.unladen_weight = get_optional_integer(form.unladen_weight.data)
+        vehicle.gross_vehicle_weight = get_optional_integer(form.gross_vehicle_weight.data)
         
         # Update insurance details
-        vehicle.insurance_company = form.insurance_company.data
-        vehicle.policy_number = form.policy_number.data
-        vehicle.policy_type = form.policy_type.data
+        vehicle.insurance_company = get_optional_string(form.insurance_company.data)
+        vehicle.policy_number = get_optional_string(form.policy_number.data)
+        vehicle.policy_type = get_optional_select(form.policy_type.data)
         vehicle.insurance_start_date = insurance_start_date
         vehicle.insurance_expiry_date = insurance_expiry_date
-        vehicle.premium_amount = form.premium_amount.data
-        vehicle.agent_name = form.agent_name.data
-        vehicle.agent_contact = form.agent_contact.data
-        vehicle.idv_amount = form.idv_amount.data
+        vehicle.premium_amount = get_optional_float(form.premium_amount.data)
+        vehicle.agent_name = get_optional_string(form.agent_name.data)
+        vehicle.agent_contact = get_optional_string(form.agent_contact.data)
+        vehicle.idv_amount = get_optional_float(form.idv_amount.data)
         
         # Update owner details
-        vehicle.owner_name = form.owner_name.data
-        vehicle.owner_father_name = form.owner_father_name.data
-        vehicle.owner_address = form.owner_address.data
-        vehicle.owner_phone = form.owner_phone.data
-        vehicle.owner_email = form.owner_email.data
+        vehicle.owner_name = get_optional_string(form.owner_name.data)
+        vehicle.owner_father_name = get_optional_string(form.owner_father_name.data)
+        vehicle.owner_address = get_optional_string(form.owner_address.data)
+        vehicle.owner_phone = get_optional_string(form.owner_phone.data)
+        vehicle.owner_email = get_optional_string(form.owner_email.data)
         vehicle.owner_dob = owner_dob
-        vehicle.driving_license_number = form.driving_license_number.data
+        vehicle.driving_license_number = get_optional_string(form.driving_license_number.data)
         vehicle.dl_expiry_date = dl_expiry_date
         
         db.session.commit()
@@ -257,11 +309,18 @@ def vehi_log_edit_vehicle(id):
 def vehi_log_delete_vehicle(id):
     vehicle = Vehicle.query.filter_by(id=id, user_id=current_user.id).first_or_404()
     
-    # Delete the vehicle (expenses will be deleted automatically due to cascade)
-    db.session.delete(vehicle)
-    db.session.commit()
+    # Store registration number before deletion
+    registration_number = vehicle.registration_number
     
-    flash(f'Vehicle {vehicle.registration_number} deleted successfully!', 'success')
+    try:
+        # Delete the vehicle (expenses will be deleted automatically due to cascade)
+        db.session.delete(vehicle)
+        db.session.commit()
+        flash(f'Vehicle {registration_number} deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('Error deleting vehicle. Please try again.', 'danger')
+    
     return redirect(url_for('vehi_log.vehi_log_vehicles'))
 
 @vehi_log_bp.route('/expenses')
@@ -344,11 +403,15 @@ def vehi_log_edit_expense(id):
 def vehi_log_delete_expense(id):
     expense = Expense.query.join(Vehicle).filter(Expense.id == id, Vehicle.user_id == current_user.id).first_or_404()
     
-    # Delete the expense
-    db.session.delete(expense)
-    db.session.commit()
+    try:
+        # Delete the expense
+        db.session.delete(expense)
+        db.session.commit()
+        flash('Expense deleted successfully!', 'success')
+    except Exception as e:
+        db.session.rollback()
+        flash('Error deleting expense. Please try again.', 'danger')
     
-    flash(f'Expense deleted successfully!', 'success')
     return redirect(url_for('vehi_log.vehi_log_expenses'))
 
 @vehi_log_bp.route('/categories')
