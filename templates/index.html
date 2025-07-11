@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-car"></i> My Vehicles</h5>
+                <a href="{{ url_for('main.add_vehicle') }}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i> Add Vehicle
+                </a>
+            </div>
+            <div class="card-body">
+                {% if vehicles %}
+                    <div class="row">
+                        {% for vehicle in vehicles %}
+                        <div class="col-md-6 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">{{ vehicle.registration_number }}</h6>
+                                    <p class="card-text text-muted">
+                                        {{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})
+                                    </p>
+                                    <a href="{{ url_for('main.vehicle_detail', id=vehicle.id) }}" class="btn btn-outline-primary btn-sm">
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-car fa-3x mb-3"></i>
+                        <p>No vehicles added yet. <a href="{{ url_for('main.add_vehicle') }}">Add your first vehicle</a></p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-receipt"></i> Recent Expenses</h5>
+                <a href="{{ url_for('main.add_expense') }}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i> Add Expense
+                </a>
+            </div>
+            <div class="card-body">
+                {% if recent_expenses %}
+                    {% for expense in recent_expenses %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div>
+                            <small class="text-muted">{{ expense.expense_date.strftime('%d/%m/%Y') }}</small>
+                            <div class="fw-bold">₹{{ "%.2f"|format(expense.amount) }}</div>
+                            <small class="text-muted">{{ expense.description[:30] }}...</small>
+                        </div>
+                        <span class="badge bg-secondary">{{ expense.category.name }}</span>
+                    </div>
+                    {% if not loop.last %}<hr>{% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="text-center text-muted py-4">
+                        <i class="fas fa-receipt fa-2x mb-3"></i>
+                        <p>No expenses recorded yet.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
