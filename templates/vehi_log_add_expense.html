@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "vehi_log_base.html" %}
 
 {% block title %}Add Expense - VehiLog{% endblock %}
 
@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{ url_for('main.expenses') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ url_for('vehi_log.vehi_log_expenses') }}" class="btn btn-secondary">Cancel</a>
                         <button type="submit" class="btn btn-primary">Add Expense</button>
                     </div>
                 </form>

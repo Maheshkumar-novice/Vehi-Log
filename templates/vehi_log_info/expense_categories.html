@@ -1,0 +1,220 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Expense Categories Guide - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Expense Categories Guide</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-tags text-success"></i> Expense Categories Guide</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list"></i> Default Categories</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-primary">Fuel</span></h6>
+                                        <p><strong>Includes:</strong> Petrol, Diesel, CNG refueling</p>
+                                        <p><strong>Frequency:</strong> Weekly/Bi-weekly</p>
+                                        <p><strong>Average Cost:</strong> ₹500-2,000 per fill</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-success">Service</span></h6>
+                                        <p><strong>Includes:</strong> Regular maintenance, oil changes, tune-ups</p>
+                                        <p><strong>Frequency:</strong> Every 3-6 months</p>
+                                        <p><strong>Average Cost:</strong> ₹1,500-5,000</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-danger">Repairs</span></h6>
+                                        <p><strong>Includes:</strong> Breakdown repairs, emergency fixes</p>
+                                        <p><strong>Frequency:</strong> As needed</p>
+                                        <p><strong>Average Cost:</strong> ₹500-10,000+</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-warning">Insurance</span></h6>
+                                        <p><strong>Includes:</strong> Premium payments, policy renewals</p>
+                                        <p><strong>Frequency:</strong> Annual</p>
+                                        <p><strong>Average Cost:</strong> ₹2,000-15,000</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-info">Registration</span></h6>
+                                        <p><strong>Includes:</strong> RC renewal, license fees, RTO charges</p>
+                                        <p><strong>Frequency:</strong> Annual/Bi-annual</p>
+                                        <p><strong>Average Cost:</strong> ₹500-3,000</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-secondary">Accessories</span></h6>
+                                        <p><strong>Includes:</strong> Seat covers, mirrors, lights, modifications</p>
+                                        <p><strong>Frequency:</strong> Occasional</p>
+                                        <p><strong>Average Cost:</strong> ₹200-5,000</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-dark">Toll</span></h6>
+                                        <p><strong>Includes:</strong> Highway tolls, parking fees</p>
+                                        <p><strong>Frequency:</strong> Travel dependent</p>
+                                        <p><strong>Average Cost:</strong> ₹50-500 per trip</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-primary">Tyres</span></h6>
+                                        <p><strong>Includes:</strong> Tyre replacement, puncture repair, alignment</p>
+                                        <p><strong>Frequency:</strong> 2-3 years</p>
+                                        <p><strong>Average Cost:</strong> ₹1,000-8,000</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-success">Parts</span></h6>
+                                        <p><strong>Includes:</strong> Brake pads, filters, spark plugs, batteries</p>
+                                        <p><strong>Frequency:</strong> As needed</p>
+                                        <p><strong>Average Cost:</strong> ₹200-5,000</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <h6><span class="badge bg-info">Cleaning</span></h6>
+                                        <p><strong>Includes:</strong> Car wash, detailing, interior cleaning</p>
+                                        <p><strong>Frequency:</strong> Weekly/Monthly</p>
+                                        <p><strong>Average Cost:</strong> ₹100-1,000</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-pie"></i> Category-wise Expense Distribution</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Two-Wheeler (Annual)</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-primary" style="width: 45%">Fuel (45%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" style="width: 25%">Service (25%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" style="width: 15%">Insurance (15%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-danger" style="width: 10%">Repairs (10%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-secondary" style="width: 5%">Others (5%)</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Four-Wheeler (Annual)</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-primary" style="width: 40%">Fuel (40%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-success" style="width: 20%">Service (20%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-warning" style="width: 20%">Insurance (20%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-danger" style="width: 15%">Repairs (15%)</div>
+                                </div>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar bg-secondary" style="width: 5%">Others (5%)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-plus"></i> Custom Categories</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>You can create custom categories for specific needs:</p>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-tag"></i> <strong>EMI Payments</strong> - Monthly loan payments</li>
+                            <li><i class="fas fa-tag"></i> <strong>Traffic Fines</strong> - Challan payments</li>
+                            <li><i class="fas fa-tag"></i> <strong>Modification</strong> - Vehicle upgrades</li>
+                            <li><i class="fas fa-tag"></i> <strong>Training</strong> - Driving lessons</li>
+                            <li><i class="fas fa-tag"></i> <strong>Emergency</strong> - Roadside assistance</li>
+                        </ul>
+                        <a href="{{ url_for('vehi_log.vehi_log_add_category') }}" class="btn btn-primary btn-sm">Add Custom Category</a>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Tips for Categorization</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Be consistent with category selection</li>
+                            <li><i class="fas fa-check text-success"></i> Use descriptive names for custom categories</li>
+                            <li><i class="fas fa-check text-success"></i> Review and merge similar categories periodically</li>
+                            <li><i class="fas fa-check text-success"></i> Keep detailed descriptions for future reference</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-calculator"></i> Cost Planning</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Monthly Budget Allocation</h6>
+                        <p><strong>Two-Wheeler:</strong> ₹3,000-5,000</p>
+                        <p><strong>Four-Wheeler:</strong> ₹8,000-15,000</p>
+                        
+                        <h6>Emergency Fund</h6>
+                        <p>Keep 10-15% of annual vehicle expenses as emergency fund for unexpected repairs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

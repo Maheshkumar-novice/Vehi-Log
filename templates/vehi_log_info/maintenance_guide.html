@@ -1,0 +1,199 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Vehicle Maintenance Guide - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Vehicle Maintenance Guide</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-tools text-primary"></i> Vehicle Maintenance Guide</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-calendar-alt"></i> Regular Service Intervals</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Service Type</th>
+                                        <th>Two-Wheeler</th>
+                                        <th>Four-Wheeler</th>
+                                        <th>Importance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Engine Oil Change</strong></td>
+                                        <td>Every 3,000-5,000 km</td>
+                                        <td>Every 5,000-10,000 km</td>
+                                        <td><span class="badge bg-danger">Critical</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Air Filter Cleaning</strong></td>
+                                        <td>Every 5,000 km</td>
+                                        <td>Every 10,000 km</td>
+                                        <td><span class="badge bg-warning">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Brake Pad Check</strong></td>
+                                        <td>Every 10,000 km</td>
+                                        <td>Every 20,000 km</td>
+                                        <td><span class="badge bg-danger">Critical</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tyre Rotation</strong></td>
+                                        <td>Every 5,000 km</td>
+                                        <td>Every 10,000 km</td>
+                                        <td><span class="badge bg-warning">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Chain Lubrication</strong></td>
+                                        <td>Every 500 km</td>
+                                        <td>N/A</td>
+                                        <td><span class="badge bg-warning">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Coolant Check</strong></td>
+                                        <td>Every 10,000 km</td>
+                                        <td>Every 20,000 km</td>
+                                        <td><span class="badge bg-info">Medium</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-clipboard-check"></i> Monthly Checks</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Two-Wheeler</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Tyre pressure and tread depth</li>
+                                    <li class="list-group-item">Chain tension and lubrication</li>
+                                    <li class="list-group-item">Brake fluid level</li>
+                                    <li class="list-group-item">Battery terminals</li>
+                                    <li class="list-group-item">Lights and indicators</li>
+                                    <li class="list-group-item">Engine oil level</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Four-Wheeler</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Tyre pressure and condition</li>
+                                    <li class="list-group-item">Engine oil level</li>
+                                    <li class="list-group-item">Coolant level</li>
+                                    <li class="list-group-item">Brake fluid level</li>
+                                    <li class="list-group-item">Battery water level</li>
+                                    <li class="list-group-item">Wiper blades condition</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Warning Signs</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-danger">Engine Issues</h6>
+                                <ul>
+                                    <li>Unusual engine noise</li>
+                                    <li>Excessive smoke from exhaust</li>
+                                    <li>Engine overheating</li>
+                                    <li>Reduced fuel efficiency</li>
+                                    <li>Difficulty starting</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-danger">Brake Issues</h6>
+                                <ul>
+                                    <li>Squealing or grinding noise</li>
+                                    <li>Brake pedal feels spongy</li>
+                                    <li>Vehicle pulls to one side</li>
+                                    <li>Brake warning light</li>
+                                    <li>Vibration while braking</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-rupee-sign"></i> Average Service Costs</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Two-Wheeler</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Basic Service:</strong> ₹500-800</li>
+                            <li><strong>Engine Oil Change:</strong> ₹300-600</li>
+                            <li><strong>Brake Pad Replace:</strong> ₹800-1,500</li>
+                            <li><strong>Chain Kit:</strong> ₹1,200-2,500</li>
+                        </ul>
+                        
+                        <h6>Four-Wheeler</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Basic Service:</strong> ₹2,000-4,000</li>
+                            <li><strong>Engine Oil Change:</strong> ₹1,500-3,000</li>
+                            <li><strong>Brake Pad Replace:</strong> ₹3,000-6,000</li>
+                            <li><strong>Tyre Replacement:</strong> ₹4,000-8,000</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Money-Saving Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Regular maintenance prevents costly repairs</li>
+                            <li><i class="fas fa-check text-success"></i> Use genuine or quality aftermarket parts</li>
+                            <li><i class="fas fa-check text-success"></i> Keep service records for warranty claims</li>
+                            <li><i class="fas fa-check text-success"></i> Learn basic maintenance tasks</li>
+                            <li><i class="fas fa-check text-success"></i> Compare prices from multiple service centers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-map-marker-alt"></i> Find Service Centers</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Look for authorized service centers in your area:</p>
+                        <ul class="list-unstyled">
+                            <li><strong>Honda:</strong> dealer.honda2wheelersindia.com</li>
+                            <li><strong>TVS:</strong> tvsmotor.com</li>
+                            <li><strong>Maruti:</strong> marutisuzuki.com</li>
+                            <li><strong>Hyundai:</strong> hyundai.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

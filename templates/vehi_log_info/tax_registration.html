@@ -1,0 +1,284 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Tax & Registration Info - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Tax & Registration Info</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-rupee-sign text-success"></i> Tax & Registration Information</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-file-invoice-dollar"></i> Road Tax in Tamil Nadu</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Two-Wheeler Tax Rates</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Engine CC</th>
+                                                <th>Tax Rate</th>
+                                                <th>One-time Tax</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Up to 75cc</td>
+                                                <td>₹150/year</td>
+                                                <td>₹2,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>76-150cc</td>
+                                                <td>₹300/year</td>
+                                                <td>₹4,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>151-250cc</td>
+                                                <td>₹600/year</td>
+                                                <td>₹8,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Above 250cc</td>
+                                                <td>₹1,000/year</td>
+                                                <td>₹15,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Four-Wheeler Tax Rates</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Tax Rate</th>
+                                                <th>One-time Tax</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Small Car</td>
+                                                <td>₹750/year</td>
+                                                <td>₹10,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Medium Car</td>
+                                                <td>₹1,500/year</td>
+                                                <td>₹20,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Large Car</td>
+                                                <td>₹3,000/year</td>
+                                                <td>₹40,000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SUV/Luxury</td>
+                                                <td>₹5,000/year</td>
+                                                <td>₹75,000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-calendar-alt"></i> Registration & Renewal Process</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>New Vehicle Registration</h6>
+                                <ol>
+                                    <li><strong>Within 7 days</strong> of purchase</li>
+                                    <li>Visit nearest RTO office</li>
+                                    <li>Submit required documents</li>
+                                    <li>Pay registration fee</li>
+                                    <li>Vehicle inspection</li>
+                                    <li>Get number plate</li>
+                                    <li>Receive RC book</li>
+                                </ol>
+                                
+                                <h6>Registration Fees</h6>
+                                <ul class="list-unstyled">
+                                    <li><strong>Two-Wheeler:</strong> ₹300-500</li>
+                                    <li><strong>Four-Wheeler:</strong> ₹600-1,000</li>
+                                    <li><strong>Smart Card:</strong> ₹50</li>
+                                    <li><strong>Number Plate:</strong> ₹350</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>RC Renewal Process</h6>
+                                <ol>
+                                    <li><strong>After 15 years</strong> for first renewal</li>
+                                    <li><strong>Every 5 years</strong> thereafter</li>
+                                    <li>Apply 6 months before expiry</li>
+                                    <li>Submit Form 25 + documents</li>
+                                    <li>Pay renewal fee</li>
+                                    <li>Vehicle fitness test</li>
+                                    <li>Get renewed RC</li>
+                                </ol>
+                                
+                                <h6>Renewal Fees</h6>
+                                <ul class="list-unstyled">
+                                    <li><strong>Two-Wheeler:</strong> ₹200-400</li>
+                                    <li><strong>Four-Wheeler:</strong> ₹400-800</li>
+                                    <li><strong>Fitness Test:</strong> ₹200</li>
+                                    <li><strong>Late Fee:</strong> ₹25/month</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-exchange-alt"></i> Inter-State Transfer (NOC)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>NOC Process</h6>
+                                <ol>
+                                    <li>Apply at current RTO</li>
+                                    <li>Submit Form 28 + documents</li>
+                                    <li>Clear all pending challans</li>
+                                    <li>Pay NOC fee</li>
+                                    <li>Get NOC certificate</li>
+                                    <li>Register at new state RTO</li>
+                                    <li>Get new registration number</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>NOC Requirements</h6>
+                                <ul>
+                                    <li>Original RC book</li>
+                                    <li>Insurance certificate</li>
+                                    <li>PUC certificate</li>
+                                    <li>Address proof of new state</li>
+                                    <li>Tax clearance certificate</li>
+                                    <li>ID proof</li>
+                                    <li>Passport size photos</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle"></i> <strong>Important:</strong> 
+                            NOC is valid for 6 months. Registration must be completed within this period.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-globe"></i> Online Services</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Tamil Nadu Online Portal</h6>
+                        <p><a href="https://tnsta.gov.in" target="_blank">tnsta.gov.in</a></p>
+                        
+                        <h6>Available Services</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Tax payment</li>
+                            <li><i class="fas fa-check text-success"></i> RC status check</li>
+                            <li><i class="fas fa-check text-success"></i> Appointment booking</li>
+                            <li><i class="fas fa-check text-success"></i> Forms download</li>
+                            <li><i class="fas fa-check text-success"></i> Challan payment</li>
+                            <li><i class="fas fa-check text-success"></i> NOC application</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-calendar-check"></i> Important Dates</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Registration Validity</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>First Registration:</strong> 15 years</li>
+                            <li><strong>Subsequent Renewals:</strong> 5 years</li>
+                            <li><strong>Commercial Vehicles:</strong> 10 years</li>
+                        </ul>
+                        
+                        <h6>Tax Payment</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Annual:</strong> Before 31st March</li>
+                            <li><strong>One-time:</strong> At registration</li>
+                            <li><strong>Quarterly:</strong> For commercial</li>
+                        </ul>
+                        
+                        <h6>Grace Period</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Tax Payment:</strong> 30 days</li>
+                            <li><strong>RC Renewal:</strong> 30 days</li>
+                            <li><strong>Late Fee:</strong> ₹25/month</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Penalties</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Common Violations</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>No Registration:</strong> ₹5,000</li>
+                            <li><strong>Expired Registration:</strong> ₹1,000</li>
+                            <li><strong>Tax Evasion:</strong> ₹10,000</li>
+                            <li><strong>Fake Documents:</strong> ₹25,000</li>
+                            <li><strong>Unauthorized Modifications:</strong> ₹5,000</li>
+                        </ul>
+                        
+                        <h6>Repeat Offences</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Fine:</strong> Double the amount</li>
+                            <li><strong>Suspension:</strong> License/Registration</li>
+                            <li><strong>Imprisonment:</strong> Up to 6 months</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Keep documents updated</li>
+                            <li><i class="fas fa-check text-success"></i> Pay tax on time</li>
+                            <li><i class="fas fa-check text-success"></i> Use online services</li>
+                            <li><i class="fas fa-check text-success"></i> Keep payment receipts</li>
+                            <li><i class="fas fa-check text-success"></i> Check validity dates</li>
+                            <li><i class="fas fa-check text-success"></i> Clear challans promptly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,248 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Documents Checklist - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Documents Checklist</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-file-alt text-secondary"></i> Documents Checklist</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-car"></i> Vehicle Registration Documents</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>For New Vehicle Registration</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-primary"></i> <strong>Form 20</strong> - Application for registration
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-primary"></i> <strong>Form 21</strong> - Sale certificate from dealer
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-primary"></i> <strong>Invoice</strong> - Original purchase invoice
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-primary"></i> <strong>Insurance Policy</strong> - Valid insurance certificate
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-primary"></i> <strong>PAN Card</strong> - PAN card copy
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-primary"></i> <strong>Address Proof</strong> - Aadhaar/Passport/Electricity bill
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-primary"></i> <strong>Pollution Certificate</strong> - PUC certificate
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-id-card"></i> Driving License Documents</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>For Learner's License</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Form 2</strong> - Application for learner's license
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Age Proof</strong> - Birth certificate/10th marksheet
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Address Proof</strong> - Aadhaar/Passport/Utility bill
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Photographs</strong> - Passport size photos
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Medical Certificate</strong> - For commercial license
+                            </li>
+                        </ul>
+                        
+                        <h6 class="mt-3">For Permanent License</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Form 4</strong> - Application for permanent license
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Learner's License</strong> - Valid learner's license
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-success"></i> <strong>Training Certificate</strong> - From recognized driving school
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-shield-alt"></i> Insurance Documents</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>For Insurance Purchase</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>RC Copy</strong> - Vehicle registration certificate
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>Driving License</strong> - Valid driving license
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>Previous Policy</strong> - For renewal cases
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>NCB Certificate</strong> - No claim bonus certificate
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>Vehicle Photos</strong> - Current vehicle photos
+                            </li>
+                        </ul>
+                        
+                        <h6 class="mt-3">For Claim Settlement</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>Policy Copy</strong> - Insurance policy certificate
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>FIR Copy</strong> - Police complaint (if required)
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>Repair Bills</strong> - Garage repair estimates
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-warning"></i> <strong>Bank Details</strong> - For claim settlement
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-exchange-alt"></i> Transfer Documents</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>For Vehicle Transfer</h6>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-info"></i> <strong>Form 29</strong> - NOC from previous owner
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-info"></i> <strong>Form 30</strong> - Application for transfer
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-info"></i> <strong>Original RC</strong> - Vehicle registration certificate
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-info"></i> <strong>Sale Agreement</strong> - Sale deed between parties
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-info"></i> <strong>Insurance Transfer</strong> - Insurance policy transfer
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fas fa-file text-info"></i> <strong>Address Proof</strong> - New owner's address proof
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-briefcase"></i> Documents to Carry While Driving</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h6 class="text-danger">Mandatory</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-check-circle text-success"></i> Valid Driving License</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Vehicle Registration Certificate</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Insurance Certificate</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Pollution Certificate</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 class="text-warning">Recommended</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-plus-circle text-info"></i> Permit (if commercial)</li>
+                                    <li><i class="fas fa-plus-circle text-info"></i> Fitness Certificate</li>
+                                    <li><i class="fas fa-plus-circle text-info"></i> Tax Receipt</li>
+                                    <li><i class="fas fa-plus-circle text-info"></i> Emergency Contact Numbers</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 class="text-info">Digital Copies</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-mobile-alt text-primary"></i> mParivahan App</li>
+                                    <li><i class="fas fa-mobile-alt text-primary"></i> DigiLocker App</li>
+                                    <li><i class="fas fa-mobile-alt text-primary"></i> Scanned copies in phone</li>
+                                    <li><i class="fas fa-mobile-alt text-primary"></i> Cloud storage backup</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-3">
+                                <h6 class="text-success">Emergency Kit</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-first-aid text-danger"></i> First Aid Kit</li>
+                                    <li><i class="fas fa-fire-extinguisher text-danger"></i> Fire Extinguisher</li>
+                                    <li><i class="fas fa-triangle-exclamation text-warning"></i> Warning Triangle</li>
+                                    <li><i class="fas fa-wrench text-secondary"></i> Basic Tools</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Important Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Document Management</h6>
+                                <ul>
+                                    <li>Keep originals safe at home</li>
+                                    <li>Carry certified copies while driving</li>
+                                    <li>Maintain digital backups</li>
+                                    <li>Regular document renewal</li>
+                                    <li>Update address changes promptly</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Renewal Schedule</h6>
+                                <ul>
+                                    <li><strong>Driving License:</strong> 20 years (new), 10 years (renewal)</li>
+                                    <li><strong>Insurance:</strong> 1 year (mandatory renewal)</li>
+                                    <li><strong>PUC:</strong> 6 months (petrol), 3 months (diesel)</li>
+                                    <li><strong>RC:</strong> 15 years (first), 5 years (subsequent)</li>
+                                    <li><strong>Fitness:</strong> 15 years (private), 10 years (commercial)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

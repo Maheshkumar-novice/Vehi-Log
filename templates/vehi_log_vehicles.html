@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "vehi_log_base.html" %}
 
 {% block title %}Vehicles - VehiLog{% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2><i class="fas fa-car"></i> Vehicles</h2>
-    <a href="{{ url_for('main.add_vehicle') }}" class="btn btn-primary">
+    <a href="{{ url_for('vehi_log.vehi_log_add_vehicle') }}" class="btn btn-primary">
         <i class="fas fa-plus"></i> Add Vehicle
     </a>
 </div>
@@ -24,7 +24,7 @@
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <small class="text-muted">₹{{ "%.2f"|format(vehicle.purchase_price) }}</small>
-                        <a href="{{ url_for('main.vehicle_detail', id=vehicle.id) }}" class="btn btn-outline-primary btn-sm">
+                        <a href="{{ url_for('vehi_log.vehi_log_vehicle_detail', id=vehicle.id) }}" class="btn btn-outline-primary btn-sm">
                             View Details
                         </a>
                     </div>
@@ -38,7 +38,7 @@
         <i class="fas fa-car fa-4x mb-3"></i>
         <h4>No vehicles added yet</h4>
         <p>Add your first vehicle to start tracking expenses</p>
-        <a href="{{ url_for('main.add_vehicle') }}" class="btn btn-primary">
+        <a href="{{ url_for('vehi_log.vehi_log_add_vehicle') }}" class="btn btn-primary">
             <i class="fas fa-plus"></i> Add Vehicle
         </a>
     </div>

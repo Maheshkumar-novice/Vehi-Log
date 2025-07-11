@@ -1,0 +1,118 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Information - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-info-circle"></i> Information Center</h2>
+        </div>
+        
+        <div class="row">
+            <!-- High Priority Pages -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-tools text-primary"></i> Vehicle Maintenance Guide</h5>
+                        <p class="card-text">Complete guide on vehicle maintenance schedules, service intervals, and what to check regularly.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_maintenance_guide') }}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-tags text-success"></i> Expense Categories Guide</h5>
+                        <p class="card-text">Understand different types of vehicle expenses and how to categorize them effectively.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_expense_categories_guide') }}" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-building text-info"></i> Tamil Nadu RTO Information</h5>
+                        <p class="card-text">Complete list of RTO offices in Tamil Nadu with contact details and services offered.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_rto_information') }}" class="btn btn-info">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Medium Priority Pages -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-gas-pump text-warning"></i> Fuel Efficiency Tips</h5>
+                        <p class="card-text">Practical tips to improve your vehicle's fuel efficiency and reduce running costs.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_fuel_efficiency') }}" class="btn btn-warning">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-shield-alt text-danger"></i> Insurance Guide</h5>
+                        <p class="card-text">Complete guide to vehicle insurance types, renewal process, and claim procedures.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_insurance_guide') }}" class="btn btn-danger">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-file-alt text-secondary"></i> Documents Checklist</h5>
+                        <p class="card-text">Essential documents required for vehicle registration, insurance, and legal compliance.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_documents_checklist') }}" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-phone text-danger"></i> Emergency Contacts</h5>
+                        <p class="card-text">Important contact numbers for roadside assistance, insurance claims, and emergency services.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_emergency_contacts') }}" class="btn btn-danger">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-rupee-sign text-success"></i> Tax & Registration Info</h5>
+                        <p class="card-text">Information about road tax, registration renewal, and NOC procedures in Tamil Nadu.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_tax_registration') }}" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Low Priority Pages -->
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-leaf text-success"></i> Seasonal Maintenance Tips</h5>
+                        <p class="card-text">Seasonal care tips for monsoon, summer, and winter conditions in Tamil Nadu.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_seasonal_maintenance') }}" class="btn btn-success">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-chart-line text-primary"></i> Cost Analysis</h5>
+                        <p class="card-text">Learn how to analyze your vehicle expenses and make informed decisions about maintenance.</p>
+                        <a href="{{ url_for('vehi_log.vehi_log_cost_analysis') }}" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

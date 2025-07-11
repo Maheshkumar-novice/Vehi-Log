@@ -5,21 +5,21 @@ from forms import VehicleForm, ExpenseForm, CategoryForm
 import os
 from datetime import datetime
 
-main_bp = Blueprint('main', __name__)
+vehi_log_bp = Blueprint('vehi_log', __name__)
 
-@main_bp.route('/')
-def index():
+@vehi_log_bp.route('/')
+def vehi_log_index():
     vehicles = Vehicle.query.all()
     recent_expenses = Expense.query.order_by(Expense.created_at.desc()).limit(5).all()
-    return render_template('index.html', vehicles=vehicles, recent_expenses=recent_expenses)
+    return render_template('vehi_log_index.html', vehicles=vehicles, recent_expenses=recent_expenses)
 
-@main_bp.route('/vehicles')
-def vehicles():
+@vehi_log_bp.route('/vehicles')
+def vehi_log_vehicles():
     vehicles = Vehicle.query.all()
-    return render_template('vehicles.html', vehicles=vehicles)
+    return render_template('vehi_log_vehicles.html', vehicles=vehicles)
 
-@main_bp.route('/vehicles/add', methods=['GET', 'POST'])
-def add_vehicle():
+@vehi_log_bp.route('/vehicles/add', methods=['GET', 'POST'])
+def vehi_log_add_vehicle():
     form = VehicleForm()
     if form.validate_on_submit():
         # Convert string date to datetime object
@@ -38,23 +38,23 @@ def add_vehicle():
         db.session.add(vehicle)
         db.session.commit()
         flash('Vehicle added successfully!', 'success')
-        return redirect(url_for('main.vehicles'))
-    return render_template('add_vehicle.html', form=form)
+        return redirect(url_for('vehi_log.vehi_log_vehicles'))
+    return render_template('vehi_log_add_vehicle.html', form=form)
 
-@main_bp.route('/vehicles/<int:id>')
-def vehicle_detail(id):
+@vehi_log_bp.route('/vehicles/<int:id>')
+def vehi_log_vehicle_detail(id):
     vehicle = Vehicle.query.get_or_404(id)
     expenses = Expense.query.filter_by(vehicle_id=id).order_by(Expense.expense_date.desc()).all()
     total_expenses = sum(expense.amount for expense in expenses)
-    return render_template('vehicle_detail.html', vehicle=vehicle, expenses=expenses, total_expenses=total_expenses)
+    return render_template('vehi_log_vehicle_detail.html', vehicle=vehicle, expenses=expenses, total_expenses=total_expenses)
 
-@main_bp.route('/expenses')
-def expenses():
+@vehi_log_bp.route('/expenses')
+def vehi_log_expenses():
     expenses = Expense.query.order_by(Expense.expense_date.desc()).all()
-    return render_template('expenses.html', expenses=expenses)
+    return render_template('vehi_log_expenses.html', expenses=expenses)
 
-@main_bp.route('/expenses/add', methods=['GET', 'POST'])
-def add_expense():
+@vehi_log_bp.route('/expenses/add', methods=['GET', 'POST'])
+def vehi_log_add_expense():
     form = ExpenseForm()
     form.vehicle_id.choices = [(v.id, f"{v.registration_number} - {v.make} {v.model}") for v in Vehicle.query.all()]
     form.category_id.choices = [(c.id, c.name) for c in ExpenseCategory.query.all()]
@@ -80,17 +80,17 @@ def add_expense():
         db.session.add(expense)
         db.session.commit()
         flash('Expense added successfully!', 'success')
-        return redirect(url_for('main.expenses'))
+        return redirect(url_for('vehi_log.vehi_log_expenses'))
     
-    return render_template('add_expense.html', form=form)
+    return render_template('vehi_log_add_expense.html', form=form)
 
-@main_bp.route('/categories')
-def categories():
+@vehi_log_bp.route('/categories')
+def vehi_log_categories():
     categories = ExpenseCategory.query.all()
-    return render_template('categories.html', categories=categories)
+    return render_template('vehi_log_categories.html', categories=categories)
 
-@main_bp.route('/categories/add', methods=['GET', 'POST'])
-def add_category():
+@vehi_log_bp.route('/categories/add', methods=['GET', 'POST'])
+def vehi_log_add_category():
     form = CategoryForm()
     if form.validate_on_submit():
         category = ExpenseCategory(
@@ -100,8 +100,53 @@ def add_category():
         db.session.add(category)
         db.session.commit()
         flash('Category added successfully!', 'success')
-        return redirect(url_for('main.categories'))
-    return render_template('add_category.html', form=form)
+        return redirect(url_for('vehi_log.vehi_log_categories'))
+    return render_template('vehi_log_add_category.html', form=form)
+
+# Information Pages
+@vehi_log_bp.route('/info')
+def vehi_log_info_index():
+    return render_template('vehi_log_info/index.html')
+
+@vehi_log_bp.route('/info/maintenance-guide')
+def vehi_log_maintenance_guide():
+    return render_template('vehi_log_info/maintenance_guide.html')
+
+@vehi_log_bp.route('/info/expense-categories')
+def vehi_log_expense_categories_guide():
+    return render_template('vehi_log_info/expense_categories.html')
+
+@vehi_log_bp.route('/info/rto-information')
+def vehi_log_rto_information():
+    return render_template('vehi_log_info/rto_information.html')
+
+@vehi_log_bp.route('/info/fuel-efficiency')
+def vehi_log_fuel_efficiency():
+    return render_template('vehi_log_info/fuel_efficiency.html')
+
+@vehi_log_bp.route('/info/insurance-guide')
+def vehi_log_insurance_guide():
+    return render_template('vehi_log_info/insurance_guide.html')
+
+@vehi_log_bp.route('/info/documents-checklist')
+def vehi_log_documents_checklist():
+    return render_template('vehi_log_info/documents_checklist.html')
+
+@vehi_log_bp.route('/info/emergency-contacts')
+def vehi_log_emergency_contacts():
+    return render_template('vehi_log_info/emergency_contacts.html')
+
+@vehi_log_bp.route('/info/tax-registration')
+def vehi_log_tax_registration():
+    return render_template('vehi_log_info/tax_registration.html')
+
+@vehi_log_bp.route('/info/seasonal-maintenance')
+def vehi_log_seasonal_maintenance():
+    return render_template('vehi_log_info/seasonal_maintenance.html')
+
+@vehi_log_bp.route('/info/cost-analysis')
+def vehi_log_cost_analysis():
+    return render_template('vehi_log_info/cost_analysis.html')
 
 def save_bill_photo(photo):
     filename = secure_filename(photo.filename)

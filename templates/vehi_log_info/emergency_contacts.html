@@ -1,0 +1,306 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Emergency Contacts - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Emergency Contacts</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-phone text-danger"></i> Emergency Contacts</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Emergency Services</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>National Emergency Numbers</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-phone-alt text-danger"></i> 
+                                        <strong>Police:</strong> <span class="badge bg-danger">100</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-ambulance text-danger"></i> 
+                                        <strong>Ambulance:</strong> <span class="badge bg-danger">102</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-fire text-danger"></i> 
+                                        <strong>Fire:</strong> <span class="badge bg-danger">101</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-car-crash text-danger"></i> 
+                                        <strong>Traffic Police:</strong> <span class="badge bg-danger">103</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-first-aid text-danger"></i> 
+                                        <strong>Unified Emergency:</strong> <span class="badge bg-danger">112</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Chennai Emergency</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-shield-alt text-primary"></i> 
+                                        <strong>Chennai Police:</strong> <span class="badge bg-primary">044-2844-0000</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-car text-primary"></i> 
+                                        <strong>Traffic Police:</strong> <span class="badge bg-primary">044-2844-9999</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-primary"></i> 
+                                        <strong>Ambulance:</strong> <span class="badge bg-primary">044-2819-1000</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-fire-extinguisher text-primary"></i> 
+                                        <strong>Fire Service:</strong> <span class="badge bg-primary">044-2819-2222</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-warning text-dark">
+                        <h5><i class="fas fa-tools"></i> Roadside Assistance</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>AAA Services</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-car text-warning"></i> 
+                                <strong>AA Tamil Nadu:</strong> <span class="badge bg-warning text-dark">044-2441-7711</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-wrench text-warning"></i> 
+                                <strong>MRF Tyredrome:</strong> <span class="badge bg-warning text-dark">1800-425-6673</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-gas-pump text-warning"></i> 
+                                <strong>Indian Oil:</strong> <span class="badge bg-warning text-dark">1800-208-3333</span>
+                            </li>
+                        </ul>
+                        
+                        <h6>Private Services</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-mobile-alt text-info"></i> 
+                                <strong>Vahak:</strong> <span class="badge bg-info">1800-123-4567</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-mobile-alt text-info"></i> 
+                                <strong>GarageWorks:</strong> <span class="badge bg-info">1800-572-4242</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-mobile-alt text-info"></i> 
+                                <strong>Pitstop:</strong> <span class="badge bg-info">1800-103-9922</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h5><i class="fas fa-shield-alt"></i> Insurance Helplines</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h6>Major Insurance Companies</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-building text-success"></i> 
+                                        <strong>ICICI Lombard:</strong> <span class="badge bg-success">1800-2666</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-building text-success"></i> 
+                                        <strong>Bajaj Allianz:</strong> <span class="badge bg-success">1800-209-5858</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-building text-success"></i> 
+                                        <strong>HDFC ERGO:</strong> <span class="badge bg-success">1800-2700-700</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-building text-success"></i> 
+                                        <strong>TATA AIG:</strong> <span class="badge bg-success">1800-266-7780</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-building text-success"></i> 
+                                        <strong>New India:</strong> <span class="badge bg-success">1800-209-1415</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-building text-success"></i> 
+                                        <strong>Oriental:</strong> <span class="badge bg-success">1800-118-485</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-building text-success"></i> 
+                                        <strong>United India:</strong> <span class="badge bg-success">1800-4253-3333</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-building"></i> RTO Helplines</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Tamil Nadu RTO</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-phone text-info"></i> 
+                                <strong>General:</strong> <span class="badge bg-info">1800-425-2670</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-id-card text-info"></i> 
+                                <strong>Sarathi (DL):</strong> <span class="badge bg-info">1800-425-2670</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-car text-info"></i> 
+                                <strong>Vahan (RC):</strong> <span class="badge bg-info">1800-425-2670</span>
+                            </li>
+                        </ul>
+                        
+                        <h6>Major Cities</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-map-marker-alt text-secondary"></i> 
+                                <strong>Chennai:</strong> <span class="badge bg-secondary">044-2819-2828</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-map-marker-alt text-secondary"></i> 
+                                <strong>Coimbatore:</strong> <span class="badge bg-secondary">0422-2422-828</span>
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-map-marker-alt text-secondary"></i> 
+                                <strong>Madurai:</strong> <span class="badge bg-secondary">0452-2537-777</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header bg-dark text-white">
+                        <h5><i class="fas fa-hospital"></i> Major Hospitals in Tamil Nadu</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Chennai</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-danger"></i> 
+                                        <strong>Apollo:</strong> <span class="badge bg-danger">044-2829-3333</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-danger"></i> 
+                                        <strong>Fortis:</strong> <span class="badge bg-danger">044-6674-4444</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-danger"></i> 
+                                        <strong>MIOT:</strong> <span class="badge bg-danger">044-2249-4444</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-danger"></i> 
+                                        <strong>Vijaya:</strong> <span class="badge bg-danger">044-2637-9999</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Coimbatore</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-warning"></i> 
+                                        <strong>KG Hospital:</strong> <span class="badge bg-warning text-dark">0422-2200-100</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-warning"></i> 
+                                        <strong>Ganga Hospital:</strong> <span class="badge bg-warning text-dark">0422-2428-100</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-warning"></i> 
+                                        <strong>KMCH:</strong> <span class="badge bg-warning text-dark">0422-4324-324</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Madurai</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-success"></i> 
+                                        <strong>Apollo:</strong> <span class="badge bg-success">0452-2580-000</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-success"></i> 
+                                        <strong>Meenakshi:</strong> <span class="badge bg-success">0452-2583-000</span>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="fas fa-hospital text-success"></i> 
+                                        <strong>Vadamalai:</strong> <span class="badge bg-success">0452-2536-666</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5><i class="fas fa-exclamation-circle"></i> What to Do in an Emergency</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Accident Response</h6>
+                                <ol>
+                                    <li>Ensure safety - move to safe location</li>
+                                    <li>Call emergency services (100/112)</li>
+                                    <li>Provide first aid if trained</li>
+                                    <li>Document the scene (photos)</li>
+                                    <li>Call insurance company</li>
+                                    <li>Get police report if required</li>
+                                    <li>Exchange information with other parties</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Vehicle Breakdown</h6>
+                                <ol>
+                                    <li>Move to safe location</li>
+                                    <li>Turn on hazard lights</li>
+                                    <li>Set up warning triangle</li>
+                                    <li>Call roadside assistance</li>
+                                    <li>Stay visible and safe</li>
+                                    <li>Keep emergency kit handy</li>
+                                    <li>Have important documents ready</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

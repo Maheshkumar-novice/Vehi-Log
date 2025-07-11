@@ -1,0 +1,270 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Seasonal Maintenance Tips - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Seasonal Maintenance Tips</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-leaf text-success"></i> Seasonal Maintenance Tips</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-danger text-white">
+                        <h5><i class="fas fa-sun"></i> Summer Care (April-June)</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Temperature: 35-45°C</h6>
+                        
+                        <h6 class="mt-3">Engine Care</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Check coolant level weekly</li>
+                            <li><i class="fas fa-check text-success"></i> Use summer-grade engine oil</li>
+                            <li><i class="fas fa-check text-success"></i> Clean radiator fins</li>
+                            <li><i class="fas fa-check text-success"></i> Check fan belt tension</li>
+                            <li><i class="fas fa-check text-success"></i> Monitor engine temperature</li>
+                        </ul>
+                        
+                        <h6>Tyre Maintenance</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Check pressure weekly</li>
+                            <li><i class="fas fa-check text-success"></i> Reduce pressure by 2-3 PSI</li>
+                            <li><i class="fas fa-check text-success"></i> Avoid overloading</li>
+                            <li><i class="fas fa-check text-success"></i> Park in shade</li>
+                        </ul>
+                        
+                        <h6>Air Conditioning</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Service AC system</li>
+                            <li><i class="fas fa-check text-success"></i> Clean/replace cabin filter</li>
+                            <li><i class="fas fa-check text-success"></i> Check refrigerant level</li>
+                            <li><i class="fas fa-check text-success"></i> Use AC regularly</li>
+                        </ul>
+                        
+                        <h6>Battery Care</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Check water level</li>
+                            <li><i class="fas fa-check text-success"></i> Clean terminals</li>
+                            <li><i class="fas fa-check text-success"></i> Keep battery cool</li>
+                            <li><i class="fas fa-check text-success"></i> Check charging system</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5><i class="fas fa-cloud-rain"></i> Monsoon Care (July-September)</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Rainfall: Heavy to Very Heavy</h6>
+                        
+                        <h6 class="mt-3">Electrical System</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Check all lights</li>
+                            <li><i class="fas fa-check text-success"></i> Test wiper blades</li>
+                            <li><i class="fas fa-check text-success"></i> Inspect electrical connections</li>
+                            <li><i class="fas fa-check text-success"></i> Clean battery terminals</li>
+                            <li><i class="fas fa-check text-success"></i> Check horn functionality</li>
+                        </ul>
+                        
+                        <h6>Braking System</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Check brake pads</li>
+                            <li><i class="fas fa-check text-success"></i> Test brake fluid</li>
+                            <li><i class="fas fa-check text-success"></i> Clean brake drums</li>
+                            <li><i class="fas fa-check text-success"></i> Check brake cables</li>
+                        </ul>
+                        
+                        <h6>Waterproofing</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Seal door/window gaps</li>
+                            <li><i class="fas fa-check text-success"></i> Apply rust protection</li>
+                            <li><i class="fas fa-check text-success"></i> Check exhaust system</li>
+                            <li><i class="fas fa-check text-success"></i> Protect electrical parts</li>
+                        </ul>
+                        
+                        <h6>Filters & Fluids</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Clean air filter frequently</li>
+                            <li><i class="fas fa-check text-success"></i> Change fuel filter</li>
+                            <li><i class="fas fa-check text-success"></i> Check transmission fluid</li>
+                            <li><i class="fas fa-check text-success"></i> Use quality fuel</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5><i class="fas fa-snowflake"></i> Winter Care (October-March)</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Temperature: 15-25°C</h6>
+                        
+                        <h6 class="mt-3">Engine Starting</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Allow proper warm-up</li>
+                            <li><i class="fas fa-check text-success"></i> Use winter-grade oil</li>
+                            <li><i class="fas fa-check text-success"></i> Check spark plugs</li>
+                            <li><i class="fas fa-check text-success"></i> Keep fuel tank full</li>
+                            <li><i class="fas fa-check text-success"></i> Check choke operation</li>
+                        </ul>
+                        
+                        <h6>Battery Performance</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Test battery capacity</li>
+                            <li><i class="fas fa-check text-success"></i> Check charging system</li>
+                            <li><i class="fas fa-check text-success"></i> Clean terminals</li>
+                            <li><i class="fas fa-check text-success"></i> Keep battery warm</li>
+                        </ul>
+                        
+                        <h6>Tyre Care</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Check tread depth</li>
+                            <li><i class="fas fa-check text-success"></i> Maintain proper pressure</li>
+                            <li><i class="fas fa-check text-success"></i> Check for cracks</li>
+                            <li><i class="fas fa-check text-success"></i> Rotate tyres</li>
+                        </ul>
+                        
+                        <h6>Visibility</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Clean headlights</li>
+                            <li><i class="fas fa-check text-success"></i> Check all bulbs</li>
+                            <li><i class="fas fa-check text-success"></i> Clean mirrors</li>
+                            <li><i class="fas fa-check text-success"></i> Test defogger</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-calendar-alt"></i> Seasonal Maintenance Schedule</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Maintenance Task</th>
+                                        <th>Summer</th>
+                                        <th>Monsoon</th>
+                                        <th>Winter</th>
+                                        <th>Priority</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Engine Oil Change</td>
+                                        <td>Thinner Grade</td>
+                                        <td>Regular</td>
+                                        <td>Winter Grade</td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Coolant System</td>
+                                        <td>Critical Check</td>
+                                        <td>Monitor</td>
+                                        <td>Basic Check</td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Air Filter</td>
+                                        <td>Clean Monthly</td>
+                                        <td>Clean Weekly</td>
+                                        <td>Replace if needed</td>
+                                        <td><span class="badge bg-warning">Medium</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tyre Pressure</td>
+                                        <td>Check Weekly</td>
+                                        <td>Check Weekly</td>
+                                        <td>Check Monthly</td>
+                                        <td><span class="badge bg-warning">Medium</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Battery</td>
+                                        <td>Check Water</td>
+                                        <td>Clean Terminals</td>
+                                        <td>Test Capacity</td>
+                                        <td><span class="badge bg-warning">Medium</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Brake System</td>
+                                        <td>Basic Check</td>
+                                        <td>Thorough Check</td>
+                                        <td>Basic Check</td>
+                                        <td><span class="badge bg-danger">High</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lights & Electrical</td>
+                                        <td>Basic Check</td>
+                                        <td>Critical Check</td>
+                                        <td>Thorough Check</td>
+                                        <td><span class="badge bg-info">Low</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Weather-Specific Precautions</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6 class="text-danger">Summer Precautions</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-exclamation-triangle text-danger"></i> Never ignore overheating</li>
+                                    <li><i class="fas fa-exclamation-triangle text-danger"></i> Avoid driving in peak heat</li>
+                                    <li><i class="fas fa-exclamation-triangle text-danger"></i> Keep extra coolant/water</li>
+                                    <li><i class="fas fa-exclamation-triangle text-danger"></i> Check AC before summer</li>
+                                    <li><i class="fas fa-exclamation-triangle text-danger"></i> Park in shade when possible</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6 class="text-primary">Monsoon Precautions</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-exclamation-triangle text-primary"></i> Avoid waterlogged areas</li>
+                                    <li><i class="fas fa-exclamation-triangle text-primary"></i> Drive slowly on wet roads</li>
+                                    <li><i class="fas fa-exclamation-triangle text-primary"></i> Keep emergency kit ready</li>
+                                    <li><i class="fas fa-exclamation-triangle text-primary"></i> Check weather before travel</li>
+                                    <li><i class="fas fa-exclamation-triangle text-primary"></i> Dry vehicle after rain</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6 class="text-info">Winter Precautions</h6>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-exclamation-triangle text-info"></i> Allow engine warm-up</li>
+                                    <li><i class="fas fa-exclamation-triangle text-info"></i> Check battery regularly</li>
+                                    <li><i class="fas fa-exclamation-triangle text-info"></i> Keep fuel tank full</li>
+                                    <li><i class="fas fa-exclamation-triangle text-info"></i> Clean fog lights</li>
+                                    <li><i class="fas fa-exclamation-triangle text-info"></i> Check heating system</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

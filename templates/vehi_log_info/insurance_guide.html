@@ -1,0 +1,227 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Insurance Guide - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Insurance Guide</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-shield-alt text-danger"></i> Vehicle Insurance Guide</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-list"></i> Types of Insurance</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card border-primary mb-3">
+                                    <div class="card-header bg-primary text-white">
+                                        <h6><i class="fas fa-shield"></i> Third Party Insurance</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>Coverage:</strong> Damage to third party property/person</p>
+                                        <p><strong>Cost:</strong> ₹500-2,000/year</p>
+                                        <p><strong>Legal:</strong> Mandatory by law</p>
+                                        <p><strong>Covers:</strong> Third party only</p>
+                                        <span class="badge bg-warning">Minimum Required</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card border-success mb-3">
+                                    <div class="card-header bg-success text-white">
+                                        <h6><i class="fas fa-shield-alt"></i> Comprehensive Insurance</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>Coverage:</strong> Own vehicle + third party</p>
+                                        <p><strong>Cost:</strong> ₹3,000-15,000/year</p>
+                                        <p><strong>Legal:</strong> Optional but recommended</p>
+                                        <p><strong>Covers:</strong> Accident, theft, fire, natural disasters</p>
+                                        <span class="badge bg-success">Recommended</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-plus"></i> Add-on Covers</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Popular Add-ons</h6>
+                                <ul>
+                                    <li><strong>Zero Depreciation:</strong> No depreciation deduction</li>
+                                    <li><strong>Engine Protection:</strong> Covers engine damage</li>
+                                    <li><strong>Roadside Assistance:</strong> 24/7 emergency support</li>
+                                    <li><strong>Consumables Cover:</strong> Covers oils, filters, etc.</li>
+                                    <li><strong>Key Replacement:</strong> Lost key coverage</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Specialized Add-ons</h6>
+                                <ul>
+                                    <li><strong>Personal Accident:</strong> Owner-driver coverage</li>
+                                    <li><strong>Passenger Cover:</strong> Covers passengers</li>
+                                    <li><strong>NCB Protection:</strong> Protects no-claim bonus</li>
+                                    <li><strong>Invoice Protection:</strong> Covers ex-showroom price</li>
+                                    <li><strong>Tyres Protection:</strong> Covers tyre damage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-file-contract"></i> Claim Process</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Steps to File Claim</h6>
+                                <ol>
+                                    <li><strong>Immediate:</strong> Inform police (if required)</li>
+                                    <li><strong>Call:</strong> Insurance company helpline</li>
+                                    <li><strong>Document:</strong> Take photos, get FIR copy</li>
+                                    <li><strong>Submit:</strong> Claim form with documents</li>
+                                    <li><strong>Survey:</strong> Wait for insurance surveyor</li>
+                                    <li><strong>Repair:</strong> Get vehicle repaired</li>
+                                    <li><strong>Settlement:</strong> Receive claim amount</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Required Documents</h6>
+                                <ul>
+                                    <li>Insurance policy copy</li>
+                                    <li>Driving license copy</li>
+                                    <li>Vehicle registration copy</li>
+                                    <li>FIR copy (if applicable)</li>
+                                    <li>Repair bills and estimates</li>
+                                    <li>Bank account details</li>
+                                    <li>Claim form (duly filled)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-building"></i> Top Insurance Companies</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-star text-warning"></i> <strong>ICICI Lombard</strong> - 1800-2666</li>
+                            <li><i class="fas fa-star text-warning"></i> <strong>Bajaj Allianz</strong> - 1800-209-5858</li>
+                            <li><i class="fas fa-star text-warning"></i> <strong>HDFC ERGO</strong> - 1800-2700-700</li>
+                            <li><i class="fas fa-star text-warning"></i> <strong>TATA AIG</strong> - 1800-266-7780</li>
+                            <li><i class="fas fa-star text-warning"></i> <strong>New India Assurance</strong> - 1800-209-1415</li>
+                            <li><i class="fas fa-star text-warning"></i> <strong>Oriental Insurance</strong> - 1800-118-485</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-rupee-sign"></i> Premium Rates</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Two-Wheeler</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Third Party:</strong> ₹500-1,500</li>
+                            <li><strong>Comprehensive:</strong> ₹2,000-5,000</li>
+                            <li><strong>Add-ons:</strong> ₹200-1,000 each</li>
+                        </ul>
+                        
+                        <h6>Four-Wheeler</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Third Party:</strong> ₹1,500-3,000</li>
+                            <li><strong>Comprehensive:</strong> ₹8,000-25,000</li>
+                            <li><strong>Add-ons:</strong> ₹500-3,000 each</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-percentage"></i> No Claim Bonus</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Year</th>
+                                        <th>NCB %</th>
+                                        <th>Savings</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1st</td>
+                                        <td>20%</td>
+                                        <td>₹1,000-2,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2nd</td>
+                                        <td>25%</td>
+                                        <td>₹1,500-3,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3rd</td>
+                                        <td>35%</td>
+                                        <td>₹2,500-5,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4th</td>
+                                        <td>45%</td>
+                                        <td>₹3,500-7,000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5th+</td>
+                                        <td>50%</td>
+                                        <td>₹4,000-8,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Compare quotes online</li>
+                            <li><i class="fas fa-check text-success"></i> Read policy terms carefully</li>
+                            <li><i class="fas fa-check text-success"></i> Declare vehicle modifications</li>
+                            <li><i class="fas fa-check text-success"></i> Renew before expiry</li>
+                            <li><i class="fas fa-check text-success"></i> Keep policy documents safe</li>
+                            <li><i class="fas fa-check text-success"></i> Maintain driving record</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

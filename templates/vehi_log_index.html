@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "vehi_log_base.html" %}
 
 {% block content %}
 <div class="row">
@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="fas fa-car"></i> My Vehicles</h5>
-                <a href="{{ url_for('main.add_vehicle') }}" class="btn btn-primary btn-sm">
+                <a href="{{ url_for('vehi_log.vehi_log_add_vehicle') }}" class="btn btn-primary btn-sm">
                     <i class="fas fa-plus"></i> Add Vehicle
                 </a>
             </div>
@@ -21,7 +21,7 @@
                                     <p class="card-text text-muted">
                                         {{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.year }})
                                     </p>
-                                    <a href="{{ url_for('main.vehicle_detail', id=vehicle.id) }}" class="btn btn-outline-primary btn-sm">
+                                    <a href="{{ url_for('vehi_log.vehi_log_vehicle_detail', id=vehicle.id) }}" class="btn btn-outline-primary btn-sm">
                                         View Details
                                     </a>
                                 </div>
@@ -32,7 +32,7 @@
                 {% else %}
                     <div class="text-center text-muted py-4">
                         <i class="fas fa-car fa-3x mb-3"></i>
-                        <p>No vehicles added yet. <a href="{{ url_for('main.add_vehicle') }}">Add your first vehicle</a></p>
+                        <p>No vehicles added yet. <a href="{{ url_for('vehi_log.vehi_log_add_vehicle') }}">Add your first vehicle</a></p>
                     </div>
                 {% endif %}
             </div>
@@ -43,7 +43,7 @@
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <h5 class="mb-0"><i class="fas fa-receipt"></i> Recent Expenses</h5>
-                <a href="{{ url_for('main.add_expense') }}" class="btn btn-primary btn-sm">
+                <a href="{{ url_for('vehi_log.vehi_log_add_expense') }}" class="btn btn-primary btn-sm">
                     <i class="fas fa-plus"></i> Add Expense
                 </a>
             </div>

@@ -1,0 +1,402 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Cost Analysis - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Cost Analysis</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-chart-line text-primary"></i> Vehicle Cost Analysis</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-calculator"></i> Total Cost of Ownership (TCO)</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Two-Wheeler TCO (5 Years)</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Component</th>
+                                                <th>Cost (₹)</th>
+                                                <th>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Purchase Price</td>
+                                                <td>80,000</td>
+                                                <td>40%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fuel</td>
+                                                <td>90,000</td>
+                                                <td>45%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maintenance</td>
+                                                <td>15,000</td>
+                                                <td>7.5%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Insurance</td>
+                                                <td>10,000</td>
+                                                <td>5%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Registration/Tax</td>
+                                                <td>5,000</td>
+                                                <td>2.5%</td>
+                                            </tr>
+                                            <tr class="fw-bold">
+                                                <td>Total</td>
+                                                <td>2,00,000</td>
+                                                <td>100%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Four-Wheeler TCO (5 Years)</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Component</th>
+                                                <th>Cost (₹)</th>
+                                                <th>%</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Purchase Price</td>
+                                                <td>6,00,000</td>
+                                                <td>50%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fuel</td>
+                                                <td>3,00,000</td>
+                                                <td>25%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Maintenance</td>
+                                                <td>1,50,000</td>
+                                                <td>12.5%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Insurance</td>
+                                                <td>75,000</td>
+                                                <td>6.25%</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Registration/Tax</td>
+                                                <td>75,000</td>
+                                                <td>6.25%</td>
+                                            </tr>
+                                            <tr class="fw-bold">
+                                                <td>Total</td>
+                                                <td>12,00,000</td>
+                                                <td>100%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-bar"></i> Annual Cost Breakdown</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Two-Wheeler Annual Costs</h6>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Fuel (45%)</span>
+                                        <span>₹18,000</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Maintenance (20%)</span>
+                                        <span>₹8,000</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Insurance (15%)</span>
+                                        <span>₹6,000</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" style="width: 15%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Repairs (12%)</span>
+                                        <span>₹4,800</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" style="width: 12%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Others (8%)</span>
+                                        <span>₹3,200</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-secondary" style="width: 8%"></div>
+                                    </div>
+                                </div>
+                                <div class="fw-bold">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Total Annual</span>
+                                        <span>₹40,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Four-Wheeler Annual Costs</h6>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Fuel (40%)</span>
+                                        <span>₹60,000</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" style="width: 40%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Maintenance (25%)</span>
+                                        <span>₹37,500</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-success" style="width: 25%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Insurance (20%)</span>
+                                        <span>₹30,000</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-warning" style="width: 20%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Repairs (10%)</span>
+                                        <span>₹15,000</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-danger" style="width: 10%"></div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Others (5%)</span>
+                                        <span>₹7,500</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-secondary" style="width: 5%"></div>
+                                    </div>
+                                </div>
+                                <div class="fw-bold">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Total Annual</span>
+                                        <span>₹1,50,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-balance-scale"></i> Decision Factors</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>When to Sell/Replace</h6>
+                                <ul>
+                                    <li><strong>Age:</strong> 10+ years for two-wheelers, 12+ years for cars</li>
+                                    <li><strong>Mileage:</strong> 80,000+ km for two-wheelers, 1,50,000+ km for cars</li>
+                                    <li><strong>Repair Costs:</strong> Exceeding 40% of vehicle value annually</li>
+                                    <li><strong>Fuel Efficiency:</strong> Drops below 70% of original</li>
+                                    <li><strong>Safety:</strong> Major safety issues or recalls</li>
+                                    <li><strong>Technology:</strong> Outdated features affecting usability</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Cost vs Benefit Analysis</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Factor</th>
+                                                <th>Keep</th>
+                                                <th>Replace</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Annual Repair Cost</td>
+                                                <td>&lt; 20% of value</td>
+                                                <td>&gt; 40% of value</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Fuel Efficiency</td>
+                                                <td>&gt; 70% original</td>
+                                                <td>&lt; 50% original</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Downtime</td>
+                                                <td>&lt; 5 days/year</td>
+                                                <td>&gt; 15 days/year</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Market Value</td>
+                                                <td>&gt; 30% purchase</td>
+                                                <td>&lt; 15% purchase</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-piggy-bank"></i> Cost Saving Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Fuel Savings</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-rupee-sign text-success"></i> Save ₹5,000-10,000/year</li>
+                            <li>• Maintain proper tyre pressure</li>
+                            <li>• Regular engine tune-ups</li>
+                            <li>• Smooth driving habits</li>
+                            <li>• Use quality fuel</li>
+                        </ul>
+                        
+                        <h6>Maintenance Savings</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-rupee-sign text-success"></i> Save ₹3,000-5,000/year</li>
+                            <li>• Regular service intervals</li>
+                            <li>• Use genuine parts</li>
+                            <li>• Learn basic maintenance</li>
+                            <li>• Compare service costs</li>
+                        </ul>
+                        
+                        <h6>Insurance Savings</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-rupee-sign text-success"></i> Save ₹2,000-4,000/year</li>
+                            <li>• Maintain no-claim bonus</li>
+                            <li>• Compare insurance quotes</li>
+                            <li>• Choose appropriate coverage</li>
+                            <li>• Safe driving record</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-chart-pie"></i> Cost Per KM</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Two-Wheeler</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Fuel:</strong> ₹2.00/km</li>
+                            <li><strong>Maintenance:</strong> ₹0.50/km</li>
+                            <li><strong>Insurance:</strong> ₹0.30/km</li>
+                            <li><strong>Depreciation:</strong> ₹1.20/km</li>
+                            <li class="fw-bold"><strong>Total:</strong> ₹4.00/km</li>
+                        </ul>
+                        
+                        <h6>Four-Wheeler</h6>
+                        <ul class="list-unstyled">
+                            <li><strong>Fuel:</strong> ₹6.00/km</li>
+                            <li><strong>Maintenance:</strong> ₹2.50/km</li>
+                            <li><strong>Insurance:</strong> ₹2.00/km</li>
+                            <li><strong>Depreciation:</strong> ₹4.50/km</li>
+                            <li class="fw-bold"><strong>Total:</strong> ₹15.00/km</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-tools"></i> Cost Analysis Tools</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Track Your Expenses</h6>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-mobile-alt text-primary"></i> VehiLog App</li>
+                            <li><i class="fas fa-mobile-alt text-primary"></i> Fuel Log Apps</li>
+                            <li><i class="fas fa-file-excel text-success"></i> Excel Spreadsheet</li>
+                            <li><i class="fas fa-receipt text-info"></i> Receipt Management</li>
+                        </ul>
+                        
+                        <h6>Key Metrics to Track</h6>
+                        <ul class="list-unstyled">
+                            <li>• Monthly fuel consumption</li>
+                            <li>• Average mileage</li>
+                            <li>• Repair frequency</li>
+                            <li>• Cost per kilometer</li>
+                            <li>• Total cost of ownership</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Smart Decisions</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> Budget for annual expenses</li>
+                            <li><i class="fas fa-check text-success"></i> Track all vehicle costs</li>
+                            <li><i class="fas fa-check text-success"></i> Compare costs before purchase</li>
+                            <li><i class="fas fa-check text-success"></i> Consider resale value</li>
+                            <li><i class="fas fa-check text-success"></i> Plan for major repairs</li>
+                            <li><i class="fas fa-check text-success"></i> Review expenses annually</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

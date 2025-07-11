@@ -1,0 +1,272 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Fuel Efficiency Tips - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('vehi_log.vehi_log_info_index') }}">Information</a></li>
+                <li class="breadcrumb-item active">Fuel Efficiency Tips</li>
+            </ol>
+        </nav>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-gas-pump text-warning"></i> Fuel Efficiency Tips</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-road"></i> Driving Habits</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6 class="text-success">Good Habits</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><i class="fas fa-check text-success"></i> Maintain steady speed</li>
+                                    <li class="list-group-item"><i class="fas fa-check text-success"></i> Gentle acceleration</li>
+                                    <li class="list-group-item"><i class="fas fa-check text-success"></i> Anticipate traffic</li>
+                                    <li class="list-group-item"><i class="fas fa-check text-success"></i> Use cruise control on highways</li>
+                                    <li class="list-group-item"><i class="fas fa-check text-success"></i> Turn off engine at long signals</li>
+                                    <li class="list-group-item"><i class="fas fa-check text-success"></i> Plan routes to avoid traffic</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-danger">Bad Habits</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><i class="fas fa-times text-danger"></i> Rapid acceleration</li>
+                                    <li class="list-group-item"><i class="fas fa-times text-danger"></i> Hard braking</li>
+                                    <li class="list-group-item"><i class="fas fa-times text-danger"></i> Excessive speeding</li>
+                                    <li class="list-group-item"><i class="fas fa-times text-danger"></i> Frequent lane changes</li>
+                                    <li class="list-group-item"><i class="fas fa-times text-danger"></i> Riding clutch</li>
+                                    <li class="list-group-item"><i class="fas fa-times text-danger"></i> Long idling</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-wrench"></i> Vehicle Maintenance</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Regular Maintenance</h6>
+                                <ul>
+                                    <li><strong>Engine Oil:</strong> Change every 5,000 km</li>
+                                    <li><strong>Air Filter:</strong> Clean/replace every 10,000 km</li>
+                                    <li><strong>Spark Plugs:</strong> Replace every 15,000 km</li>
+                                    <li><strong>Fuel Filter:</strong> Clean every 20,000 km</li>
+                                    <li><strong>Tyre Pressure:</strong> Check monthly</li>
+                                    <li><strong>Wheel Alignment:</strong> Check every 6 months</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Fuel System Care</h6>
+                                <ul>
+                                    <li><strong>Fuel Quality:</strong> Use branded fuel stations</li>
+                                    <li><strong>Fuel Additives:</strong> Use occasionally</li>
+                                    <li><strong>Carburetor:</strong> Clean every 15,000 km</li>
+                                    <li><strong>Fuel Injectors:</strong> Clean every 30,000 km</li>
+                                    <li><strong>Fuel Tank:</strong> Don't run on empty</li>
+                                    <li><strong>Fuel Line:</strong> Check for leaks</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-thermometer-half"></i> Seasonal Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h6>Summer (April-June)</h6>
+                                <ul>
+                                    <li>Park in shade when possible</li>
+                                    <li>Use AC efficiently</li>
+                                    <li>Check coolant levels</li>
+                                    <li>Maintain proper tyre pressure</li>
+                                    <li>Service air conditioning</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Monsoon (July-September)</h6>
+                                <ul>
+                                    <li>Use quality fuel</li>
+                                    <li>Check air filter frequently</li>
+                                    <li>Avoid water-logged areas</li>
+                                    <li>Maintain steady speed</li>
+                                    <li>Use lights during rain</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Winter (October-March)</h6>
+                                <ul>
+                                    <li>Allow engine warm-up</li>
+                                    <li>Check battery condition</li>
+                                    <li>Use lower viscosity oil</li>
+                                    <li>Keep fuel tank full</li>
+                                    <li>Check heating system</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-calculator"></i> Fuel Economy by Vehicle Type</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>Two-Wheeler Mileage</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>City</th>
+                                                <th>Highway</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Scooter</td>
+                                                <td>45-55 km/l</td>
+                                                <td>50-60 km/l</td>
+                                            </tr>
+                                            <tr>
+                                                <td>100-125cc</td>
+                                                <td>50-65 km/l</td>
+                                                <td>55-70 km/l</td>
+                                            </tr>
+                                            <tr>
+                                                <td>150-200cc</td>
+                                                <td>35-45 km/l</td>
+                                                <td>40-50 km/l</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <h6>Four-Wheeler Mileage</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>City</th>
+                                                <th>Highway</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Hatchback</td>
+                                                <td>15-20 km/l</td>
+                                                <td>18-25 km/l</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sedan</td>
+                                                <td>12-18 km/l</td>
+                                                <td>15-22 km/l</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SUV</td>
+                                                <td>10-15 km/l</td>
+                                                <td>12-18 km/l</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-tachometer-alt"></i> Quick Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-success"></i> <strong>Optimal Speed:</strong> 40-60 km/h for best mileage</li>
+                            <li><i class="fas fa-check text-success"></i> <strong>Gear Shifting:</strong> Shift at 2,000-2,500 RPM</li>
+                            <li><i class="fas fa-check text-success"></i> <strong>Tyre Pressure:</strong> Check monthly, maintain as per manual</li>
+                            <li><i class="fas fa-check text-success"></i> <strong>Weight:</strong> Remove unnecessary items</li>
+                            <li><i class="fas fa-check text-success"></i> <strong>Route Planning:</strong> Use GPS for shortest routes</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-rupee-sign"></i> Fuel Cost Calculator</h5>
+                    </div>
+                    <div class="card-body">
+                        <h6>Monthly Fuel Cost Estimate</h6>
+                        <div class="mb-3">
+                            <strong>Two-Wheeler (60 km/l):</strong>
+                            <ul class="list-unstyled">
+                                <li>30 km/day: ₹1,500/month</li>
+                                <li>50 km/day: ₹2,500/month</li>
+                                <li>70 km/day: ₹3,500/month</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Four-Wheeler (18 km/l):</strong>
+                            <ul class="list-unstyled">
+                                <li>30 km/day: ₹5,000/month</li>
+                                <li>50 km/day: ₹8,300/month</li>
+                                <li>70 km/day: ₹11,700/month</li>
+                            </ul>
+                        </div>
+                        <small class="text-muted">*Based on ₹100/liter fuel price</small>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5><i class="fas fa-mobile-alt"></i> Fuel Tracking Apps</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-mobile-alt"></i> <strong>Fuelio:</strong> Comprehensive fuel tracking</li>
+                            <li><i class="fas fa-mobile-alt"></i> <strong>Drivvo:</strong> Vehicle expense manager</li>
+                            <li><i class="fas fa-mobile-alt"></i> <strong>My Car:</strong> Maintenance & fuel log</li>
+                            <li><i class="fas fa-mobile-alt"></i> <strong>VehiLog:</strong> This app for complete tracking!</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-lightbulb"></i> Pro Tips</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-star text-warning"></i> Plan errands in one trip</li>
+                            <li><i class="fas fa-star text-warning"></i> Carpool when possible</li>
+                            <li><i class="fas fa-star text-warning"></i> Use public transport for long distances</li>
+                            <li><i class="fas fa-star text-warning"></i> Walk or cycle for short distances</li>
+                            <li><i class="fas fa-star text-warning"></i> Keep maintenance records</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

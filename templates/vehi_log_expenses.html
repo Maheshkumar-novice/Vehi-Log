@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "vehi_log_base.html" %}
 
 {% block title %}Expenses - VehiLog{% endblock %}
 
 {% block content %}
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h2><i class="fas fa-receipt"></i> Expenses</h2>
-    <a href="{{ url_for('main.add_expense') }}" class="btn btn-primary">
+    <a href="{{ url_for('vehi_log.vehi_log_add_expense') }}" class="btn btn-primary">
         <i class="fas fa-plus"></i> Add Expense
     </a>
 </div>
@@ -31,7 +31,7 @@
                         <tr>
                             <td>{{ expense.expense_date.strftime('%d/%m/%Y') }}</td>
                             <td>
-                                <a href="{{ url_for('main.vehicle_detail', id=expense.vehicle.id) }}">
+                                <a href="{{ url_for('vehi_log.vehi_log_vehicle_detail', id=expense.vehicle.id) }}">
                                     {{ expense.vehicle.registration_number }}
                                 </a>
                             </td>
@@ -52,7 +52,7 @@
         <i class="fas fa-receipt fa-4x mb-3"></i>
         <h4>No expenses recorded yet</h4>
         <p>Start tracking your vehicle expenses</p>
-        <a href="{{ url_for('main.add_expense') }}" class="btn btn-primary">
+        <a href="{{ url_for('vehi_log.vehi_log_add_expense') }}" class="btn btn-primary">
             <i class="fas fa-plus"></i> Add Expense
         </a>
     </div>

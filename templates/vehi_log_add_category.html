@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "vehi_log_base.html" %}
 
 {% block title %}Add Category - VehiLog{% endblock %}
 
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="{{ url_for('main.categories') }}" class="btn btn-secondary">Cancel</a>
+                        <a href="{{ url_for('vehi_log.vehi_log_categories') }}" class="btn btn-secondary">Cancel</a>
                         <button type="submit" class="btn btn-primary">Add Category</button>
                     </div>
                 </form>
