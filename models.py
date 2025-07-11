@@ -35,7 +35,57 @@ class Vehicle(db.Model):
     purchase_price = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     
+    # RC Details
+    engine_number = db.Column(db.String(50))
+    chassis_number = db.Column(db.String(50))
+    registration_date = db.Column(db.Date)
+    rto_office = db.Column(db.String(50))
+    rc_expiry_date = db.Column(db.Date)
+    seating_capacity = db.Column(db.Integer)
+    unladen_weight = db.Column(db.Integer)
+    gross_vehicle_weight = db.Column(db.Integer)
+    rc_document_photo = db.Column(db.String(200))
+    
+    # Insurance Details
+    insurance_company = db.Column(db.String(100))
+    policy_number = db.Column(db.String(50))
+    policy_type = db.Column(db.String(30))  # Comprehensive, Third Party
+    insurance_start_date = db.Column(db.Date)
+    insurance_expiry_date = db.Column(db.Date)
+    premium_amount = db.Column(db.Float)
+    agent_name = db.Column(db.String(100))
+    agent_contact = db.Column(db.String(20))
+    idv_amount = db.Column(db.Float)  # Insured Declared Value
+    insurance_document_photo = db.Column(db.String(200))
+    
+    # Owner Details
+    owner_name = db.Column(db.String(100))
+    owner_father_name = db.Column(db.String(100))
+    owner_address = db.Column(db.Text)
+    owner_phone = db.Column(db.String(20))
+    owner_email = db.Column(db.String(100))
+    owner_dob = db.Column(db.Date)
+    driving_license_number = db.Column(db.String(50))
+    dl_expiry_date = db.Column(db.Date)
+    dl_document_photo = db.Column(db.String(200))
+    
     expenses = db.relationship('Expense', backref='vehicle', lazy=True, cascade='all, delete-orphan')
+    
+    def has_expired_documents(self):
+        """Check if any documents are expired or expiring soon (within 30 days)"""
+        from datetime import date, timedelta
+        today = date.today()
+        alert_date = today + timedelta(days=30)
+        
+        expired_docs = []
+        if self.rc_expiry_date and self.rc_expiry_date <= alert_date:
+            expired_docs.append(('RC', self.rc_expiry_date))
+        if self.insurance_expiry_date and self.insurance_expiry_date <= alert_date:
+            expired_docs.append(('Insurance', self.insurance_expiry_date))
+        if self.dl_expiry_date and self.dl_expiry_date <= alert_date:
+            expired_docs.append(('Driving License', self.dl_expiry_date))
+        
+        return expired_docs
     
     def __repr__(self):
         return f'<Vehicle {self.registration_number}>'

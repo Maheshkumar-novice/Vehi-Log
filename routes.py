@@ -73,8 +73,33 @@ def vehi_log_vehicles():
 def vehi_log_add_vehicle():
     form = VehicleForm()
     if form.validate_on_submit():
-        # Convert string date to datetime object
+        # Convert string dates to datetime objects
         purchase_date = datetime.strptime(form.purchase_date.data, '%d/%m/%Y').date()
+        
+        # Handle optional date fields
+        registration_date = None
+        if form.registration_date.data:
+            registration_date = datetime.strptime(form.registration_date.data, '%d/%m/%Y').date()
+        
+        rc_expiry_date = None
+        if form.rc_expiry_date.data:
+            rc_expiry_date = datetime.strptime(form.rc_expiry_date.data, '%d/%m/%Y').date()
+        
+        insurance_start_date = None
+        if form.insurance_start_date.data:
+            insurance_start_date = datetime.strptime(form.insurance_start_date.data, '%d/%m/%Y').date()
+        
+        insurance_expiry_date = None
+        if form.insurance_expiry_date.data:
+            insurance_expiry_date = datetime.strptime(form.insurance_expiry_date.data, '%d/%m/%Y').date()
+        
+        owner_dob = None
+        if form.owner_dob.data:
+            owner_dob = datetime.strptime(form.owner_dob.data, '%d/%m/%Y').date()
+        
+        dl_expiry_date = None
+        if form.dl_expiry_date.data:
+            dl_expiry_date = datetime.strptime(form.dl_expiry_date.data, '%d/%m/%Y').date()
         
         vehicle = Vehicle(
             user_id=current_user.id,
@@ -85,7 +110,35 @@ def vehi_log_add_vehicle():
             vehicle_type=form.vehicle_type.data,
             fuel_type=form.fuel_type.data,
             purchase_date=purchase_date,
-            purchase_price=form.purchase_price.data
+            purchase_price=form.purchase_price.data,
+            # RC Details
+            engine_number=form.engine_number.data,
+            chassis_number=form.chassis_number.data,
+            registration_date=registration_date,
+            rto_office=form.rto_office.data,
+            rc_expiry_date=rc_expiry_date,
+            seating_capacity=form.seating_capacity.data,
+            unladen_weight=form.unladen_weight.data,
+            gross_vehicle_weight=form.gross_vehicle_weight.data,
+            # Insurance Details
+            insurance_company=form.insurance_company.data,
+            policy_number=form.policy_number.data,
+            policy_type=form.policy_type.data,
+            insurance_start_date=insurance_start_date,
+            insurance_expiry_date=insurance_expiry_date,
+            premium_amount=form.premium_amount.data,
+            agent_name=form.agent_name.data,
+            agent_contact=form.agent_contact.data,
+            idv_amount=form.idv_amount.data,
+            # Owner Details
+            owner_name=form.owner_name.data,
+            owner_father_name=form.owner_father_name.data,
+            owner_address=form.owner_address.data,
+            owner_phone=form.owner_phone.data,
+            owner_email=form.owner_email.data,
+            owner_dob=owner_dob,
+            driving_license_number=form.driving_license_number.data,
+            dl_expiry_date=dl_expiry_date
         )
         db.session.add(vehicle)
         db.session.commit()
@@ -110,11 +163,49 @@ def vehi_log_edit_vehicle(id):
     if request.method == 'GET':
         # Pre-populate form with existing data
         form.purchase_date.data = vehicle.purchase_date.strftime('%d/%m/%Y')
+        if vehicle.registration_date:
+            form.registration_date.data = vehicle.registration_date.strftime('%d/%m/%Y')
+        if vehicle.rc_expiry_date:
+            form.rc_expiry_date.data = vehicle.rc_expiry_date.strftime('%d/%m/%Y')
+        if vehicle.insurance_start_date:
+            form.insurance_start_date.data = vehicle.insurance_start_date.strftime('%d/%m/%Y')
+        if vehicle.insurance_expiry_date:
+            form.insurance_expiry_date.data = vehicle.insurance_expiry_date.strftime('%d/%m/%Y')
+        if vehicle.owner_dob:
+            form.owner_dob.data = vehicle.owner_dob.strftime('%d/%m/%Y')
+        if vehicle.dl_expiry_date:
+            form.dl_expiry_date.data = vehicle.dl_expiry_date.strftime('%d/%m/%Y')
     
     if form.validate_on_submit():
-        # Convert string date to datetime object
+        # Convert string dates to datetime objects
         purchase_date = datetime.strptime(form.purchase_date.data, '%d/%m/%Y').date()
         
+        # Handle optional date fields
+        registration_date = None
+        if form.registration_date.data:
+            registration_date = datetime.strptime(form.registration_date.data, '%d/%m/%Y').date()
+        
+        rc_expiry_date = None
+        if form.rc_expiry_date.data:
+            rc_expiry_date = datetime.strptime(form.rc_expiry_date.data, '%d/%m/%Y').date()
+        
+        insurance_start_date = None
+        if form.insurance_start_date.data:
+            insurance_start_date = datetime.strptime(form.insurance_start_date.data, '%d/%m/%Y').date()
+        
+        insurance_expiry_date = None
+        if form.insurance_expiry_date.data:
+            insurance_expiry_date = datetime.strptime(form.insurance_expiry_date.data, '%d/%m/%Y').date()
+        
+        owner_dob = None
+        if form.owner_dob.data:
+            owner_dob = datetime.strptime(form.owner_dob.data, '%d/%m/%Y').date()
+        
+        dl_expiry_date = None
+        if form.dl_expiry_date.data:
+            dl_expiry_date = datetime.strptime(form.dl_expiry_date.data, '%d/%m/%Y').date()
+        
+        # Update basic vehicle details
         vehicle.registration_number = form.registration_number.data
         vehicle.make = form.make.data
         vehicle.model = form.model.data
@@ -123,6 +214,37 @@ def vehi_log_edit_vehicle(id):
         vehicle.fuel_type = form.fuel_type.data
         vehicle.purchase_date = purchase_date
         vehicle.purchase_price = form.purchase_price.data
+        
+        # Update RC details
+        vehicle.engine_number = form.engine_number.data
+        vehicle.chassis_number = form.chassis_number.data
+        vehicle.registration_date = registration_date
+        vehicle.rto_office = form.rto_office.data
+        vehicle.rc_expiry_date = rc_expiry_date
+        vehicle.seating_capacity = form.seating_capacity.data
+        vehicle.unladen_weight = form.unladen_weight.data
+        vehicle.gross_vehicle_weight = form.gross_vehicle_weight.data
+        
+        # Update insurance details
+        vehicle.insurance_company = form.insurance_company.data
+        vehicle.policy_number = form.policy_number.data
+        vehicle.policy_type = form.policy_type.data
+        vehicle.insurance_start_date = insurance_start_date
+        vehicle.insurance_expiry_date = insurance_expiry_date
+        vehicle.premium_amount = form.premium_amount.data
+        vehicle.agent_name = form.agent_name.data
+        vehicle.agent_contact = form.agent_contact.data
+        vehicle.idv_amount = form.idv_amount.data
+        
+        # Update owner details
+        vehicle.owner_name = form.owner_name.data
+        vehicle.owner_father_name = form.owner_father_name.data
+        vehicle.owner_address = form.owner_address.data
+        vehicle.owner_phone = form.owner_phone.data
+        vehicle.owner_email = form.owner_email.data
+        vehicle.owner_dob = owner_dob
+        vehicle.driving_license_number = form.driving_license_number.data
+        vehicle.dl_expiry_date = dl_expiry_date
         
         db.session.commit()
         flash('Vehicle updated successfully!', 'success')
