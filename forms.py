@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, IntegerField, FloatField, SelectField, DateField, TextAreaField
-from wtforms.validators import DataRequired, Length, NumberRange, Regexp, ValidationError
+from wtforms import StringField, IntegerField, FloatField, SelectField, DateField, TextAreaField, PasswordField
+from wtforms.validators import DataRequired, Length, NumberRange, Regexp, ValidationError, EqualTo
 from datetime import date, datetime
 
 def validate_date_format(form, field):
@@ -59,3 +59,18 @@ class CategoryForm(FlaskForm):
                       render_kw={"placeholder": "Brake Service, Oil Change, Tyre Rotation"})
     description = TextAreaField('Description', validators=[Length(max=200)],
                                render_kw={"placeholder": "Description of this expense category"})
+
+class LoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=80)],
+                          render_kw={"placeholder": "Enter your username"})
+    password = PasswordField('Password', validators=[DataRequired()],
+                            render_kw={"placeholder": "Enter your password"})
+
+class RegistrationForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=3, max=80)],
+                          render_kw={"placeholder": "Choose a username"})
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=6)],
+                            render_kw={"placeholder": "Choose a strong password"})
+    confirm_password = PasswordField('Confirm Password', 
+                                   validators=[DataRequired(), EqualTo('password', message='Passwords must match')],
+                                   render_kw={"placeholder": "Confirm your password"})

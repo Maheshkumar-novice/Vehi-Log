@@ -128,5 +128,31 @@ window.vehiLog = {
     calculateTotal: vehiLogCalculateTotal
 };
 
-// Make confirmDeleteVehicle available globally
+// Expense delete confirmation
+function confirmDeleteExpense(expenseId, description, amount) {
+    const confirmMessage = `Are you sure you want to delete this expense?\n\nDescription: ${description}\nAmount: ₹${amount}\n\nThis action cannot be undone.`;
+    
+    if (confirm(confirmMessage)) {
+        // Create a form and submit it as POST request
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/expenses/${expenseId}/delete`;
+        
+        // Add CSRF token if available
+        const csrfToken = document.querySelector('meta[name="csrf-token"]');
+        if (csrfToken) {
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrf_token';
+            csrfInput.value = csrfToken.getAttribute('content');
+            form.appendChild(csrfInput);
+        }
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// Make confirmation functions available globally
 window.confirmDeleteVehicle = confirmDeleteVehicle;
+window.confirmDeleteExpense = confirmDeleteExpense;

@@ -1,24 +1,75 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
+from flask_login import login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
-from models import db, Vehicle, Expense, ExpenseCategory
-from forms import VehicleForm, ExpenseForm, CategoryForm
+from models import db, Vehicle, Expense, ExpenseCategory, User
+from forms import VehicleForm, ExpenseForm, CategoryForm, LoginForm, RegistrationForm
 import os
 from datetime import datetime
 
 vehi_log_bp = Blueprint('vehi_log', __name__)
 
+# Authentication routes
+@vehi_log_bp.route('/login', methods=['GET', 'POST'])
+def vehi_log_login():
+    if current_user.is_authenticated:
+        return redirect(url_for('vehi_log.vehi_log_index'))
+    
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and user.check_password(form.password.data):
+            login_user(user)
+            flash('Login successful!', 'success')
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('vehi_log.vehi_log_index'))
+        else:
+            flash('Invalid username or password', 'danger')
+    
+    return render_template('vehi_log_login.html', form=form)
+
+@vehi_log_bp.route('/register', methods=['GET', 'POST'])
+def vehi_log_register():
+    if current_user.is_authenticated:
+        return redirect(url_for('vehi_log.vehi_log_index'))
+    
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        # Check if username already exists
+        existing_user = User.query.filter_by(username=form.username.data).first()
+        if existing_user:
+            flash('Username already exists. Please choose a different one.', 'danger')
+        else:
+            user = User(username=form.username.data)
+            user.set_password(form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            flash('Registration successful! Please login.', 'success')
+            return redirect(url_for('vehi_log.vehi_log_login'))
+    
+    return render_template('vehi_log_register.html', form=form)
+
+@vehi_log_bp.route('/logout')
+@login_required
+def vehi_log_logout():
+    logout_user()
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('vehi_log.vehi_log_login'))
+
 @vehi_log_bp.route('/')
+@login_required
 def vehi_log_index():
-    vehicles = Vehicle.query.all()
-    recent_expenses = Expense.query.order_by(Expense.created_at.desc()).limit(5).all()
+    vehicles = Vehicle.query.filter_by(user_id=current_user.id).all()
+    recent_expenses = Expense.query.join(Vehicle).filter(Vehicle.user_id == current_user.id).order_by(Expense.created_at.desc()).limit(5).all()
     return render_template('vehi_log_index.html', vehicles=vehicles, recent_expenses=recent_expenses)
 
 @vehi_log_bp.route('/vehicles')
+@login_required
 def vehi_log_vehicles():
-    vehicles = Vehicle.query.all()
+    vehicles = Vehicle.query.filter_by(user_id=current_user.id).all()
     return render_template('vehi_log_vehicles.html', vehicles=vehicles)
 
 @vehi_log_bp.route('/vehicles/add', methods=['GET', 'POST'])
+@login_required
 def vehi_log_add_vehicle():
     form = VehicleForm()
     if form.validate_on_submit():
@@ -26,6 +77,7 @@ def vehi_log_add_vehicle():
         purchase_date = datetime.strptime(form.purchase_date.data, '%d/%m/%Y').date()
         
         vehicle = Vehicle(
+            user_id=current_user.id,
             registration_number=form.registration_number.data,
             make=form.make.data,
             model=form.model.data,
@@ -42,15 +94,17 @@ def vehi_log_add_vehicle():
     return render_template('vehi_log_add_vehicle.html', form=form)
 
 @vehi_log_bp.route('/vehicles/<int:id>')
+@login_required
 def vehi_log_vehicle_detail(id):
-    vehicle = Vehicle.query.get_or_404(id)
+    vehicle = Vehicle.query.filter_by(id=id, user_id=current_user.id).first_or_404()
     expenses = Expense.query.filter_by(vehicle_id=id).order_by(Expense.expense_date.desc()).all()
     total_expenses = sum(expense.amount for expense in expenses)
     return render_template('vehi_log_vehicle_detail.html', vehicle=vehicle, expenses=expenses, total_expenses=total_expenses)
 
 @vehi_log_bp.route('/vehicles/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
 def vehi_log_edit_vehicle(id):
-    vehicle = Vehicle.query.get_or_404(id)
+    vehicle = Vehicle.query.filter_by(id=id, user_id=current_user.id).first_or_404()
     form = VehicleForm(obj=vehicle)
     
     if request.method == 'GET':
@@ -77,8 +131,9 @@ def vehi_log_edit_vehicle(id):
     return render_template('vehi_log_edit_vehicle.html', form=form, vehicle=vehicle)
 
 @vehi_log_bp.route('/vehicles/<int:id>/delete', methods=['POST'])
+@login_required
 def vehi_log_delete_vehicle(id):
-    vehicle = Vehicle.query.get_or_404(id)
+    vehicle = Vehicle.query.filter_by(id=id, user_id=current_user.id).first_or_404()
     
     # Delete the vehicle (expenses will be deleted automatically due to cascade)
     db.session.delete(vehicle)
@@ -88,14 +143,16 @@ def vehi_log_delete_vehicle(id):
     return redirect(url_for('vehi_log.vehi_log_vehicles'))
 
 @vehi_log_bp.route('/expenses')
+@login_required
 def vehi_log_expenses():
-    expenses = Expense.query.order_by(Expense.expense_date.desc()).all()
+    expenses = Expense.query.join(Vehicle).filter(Vehicle.user_id == current_user.id).order_by(Expense.expense_date.desc()).all()
     return render_template('vehi_log_expenses.html', expenses=expenses)
 
 @vehi_log_bp.route('/expenses/add', methods=['GET', 'POST'])
+@login_required
 def vehi_log_add_expense():
     form = ExpenseForm()
-    form.vehicle_id.choices = [(v.id, f"{v.registration_number} - {v.make} {v.model}") for v in Vehicle.query.all()]
+    form.vehicle_id.choices = [(v.id, f"{v.registration_number} - {v.make} {v.model}") for v in Vehicle.query.filter_by(user_id=current_user.id).all()]
     form.category_id.choices = [(c.id, c.name) for c in ExpenseCategory.query.all()]
     
     if form.validate_on_submit():
@@ -123,12 +180,63 @@ def vehi_log_add_expense():
     
     return render_template('vehi_log_add_expense.html', form=form)
 
+@vehi_log_bp.route('/expenses/<int:id>/edit', methods=['GET', 'POST'])
+@login_required
+def vehi_log_edit_expense(id):
+    expense = Expense.query.join(Vehicle).filter(Expense.id == id, Vehicle.user_id == current_user.id).first_or_404()
+    form = ExpenseForm(obj=expense)
+    form.vehicle_id.choices = [(v.id, f"{v.registration_number} - {v.make} {v.model}") for v in Vehicle.query.filter_by(user_id=current_user.id).all()]
+    form.category_id.choices = [(c.id, c.name) for c in ExpenseCategory.query.all()]
+    
+    if request.method == 'GET':
+        # Pre-populate form with existing data
+        form.expense_date.data = expense.expense_date.strftime('%d/%m/%Y')
+        form.vehicle_id.data = expense.vehicle_id
+        form.category_id.data = expense.category_id
+    
+    if form.validate_on_submit():
+        filename = expense.bill_photo  # Keep existing photo by default
+        if form.bill_photo.data:
+            filename = save_bill_photo(form.bill_photo.data)
+        
+        # Convert string date to datetime object
+        expense_date = datetime.strptime(form.expense_date.data, '%d/%m/%Y').date()
+        
+        expense.vehicle_id = form.vehicle_id.data
+        expense.category_id = form.category_id.data
+        expense.amount = form.amount.data
+        expense.description = form.description.data
+        expense.expense_date = expense_date
+        expense.odometer_reading = form.odometer_reading.data
+        expense.vendor_name = form.vendor_name.data
+        expense.bill_photo = filename
+        
+        db.session.commit()
+        flash('Expense updated successfully!', 'success')
+        return redirect(url_for('vehi_log.vehi_log_expenses'))
+    
+    return render_template('vehi_log_edit_expense.html', form=form, expense=expense)
+
+@vehi_log_bp.route('/expenses/<int:id>/delete', methods=['POST'])
+@login_required
+def vehi_log_delete_expense(id):
+    expense = Expense.query.join(Vehicle).filter(Expense.id == id, Vehicle.user_id == current_user.id).first_or_404()
+    
+    # Delete the expense
+    db.session.delete(expense)
+    db.session.commit()
+    
+    flash(f'Expense deleted successfully!', 'success')
+    return redirect(url_for('vehi_log.vehi_log_expenses'))
+
 @vehi_log_bp.route('/categories')
+@login_required
 def vehi_log_categories():
     categories = ExpenseCategory.query.all()
     return render_template('vehi_log_categories.html', categories=categories)
 
 @vehi_log_bp.route('/categories/add', methods=['GET', 'POST'])
+@login_required
 def vehi_log_add_category():
     form = CategoryForm()
     if form.validate_on_submit():
@@ -144,10 +252,12 @@ def vehi_log_add_category():
 
 # Information Pages
 @vehi_log_bp.route('/info')
+@login_required
 def vehi_log_info_index():
     return render_template('vehi_log_info/index.html')
 
 @vehi_log_bp.route('/info/maintenance-guide')
+@login_required
 def vehi_log_maintenance_guide():
     return render_template('vehi_log_info/maintenance_guide.html')
 

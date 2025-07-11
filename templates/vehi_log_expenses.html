@@ -24,6 +24,7 @@
                             <th>Description</th>
                             <th>Vendor</th>
                             <th>Odometer</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,21 @@
                             <td>{{ expense.description }}</td>
                             <td>{{ expense.vendor_name or '-' }}</td>
                             <td>{{ expense.odometer_reading or '-' }}</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ url_for('vehi_log.vehi_log_edit_expense', id=expense.id) }}">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </a></li>
+                                        <li><a class="dropdown-item text-danger" href="#" onclick="confirmDeleteExpense({{ expense.id }}, '{{ expense.description|truncate(30) }}', '{{ "%.2f"|format(expense.amount) }}')">
+                                            <i class="fas fa-trash"></i> Delete
+                                        </a></li>
+                                    </ul>
+                                </div>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

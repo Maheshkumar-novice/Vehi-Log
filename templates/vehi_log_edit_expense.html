@@ -1,0 +1,109 @@
+{% extends "vehi_log_base.html" %}
+
+{% block title %}Edit Expense - VehiLog{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-edit"></i> Edit Expense</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.vehicle_id.label(class="form-label") }}
+                                {{ form.vehicle_id(class="form-select") }}
+                                {% if form.vehicle_id.errors %}
+                                    <div class="text-danger">{{ form.vehicle_id.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.category_id.label(class="form-label") }}
+                                {{ form.category_id(class="form-select") }}
+                                {% if form.category_id.errors %}
+                                    <div class="text-danger">{{ form.category_id.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.amount.label(class="form-label") }}
+                                {{ form.amount(class="form-control") }}
+                                {% if form.amount.errors %}
+                                    <div class="text-danger">{{ form.amount.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.expense_date.label(class="form-label") }}
+                                {{ form.expense_date(class="form-control", placeholder="dd/mm/yyyy", pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}") }}
+                                {% if form.expense_date.errors %}
+                                    <div class="text-danger">{{ form.expense_date.errors[0] }}</div>
+                                {% endif %}
+                                <div class="form-text">Format: dd/mm/yyyy (e.g., 15/08/2023)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.description.label(class="form-label") }}
+                        {{ form.description(class="form-control", rows="3") }}
+                        {% if form.description.errors %}
+                            <div class="text-danger">{{ form.description.errors[0] }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.vendor_name.label(class="form-label") }}
+                                {{ form.vendor_name(class="form-control") }}
+                                {% if form.vendor_name.errors %}
+                                    <div class="text-danger">{{ form.vendor_name.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                {{ form.odometer_reading.label(class="form-label") }}
+                                {{ form.odometer_reading(class="form-control") }}
+                                {% if form.odometer_reading.errors %}
+                                    <div class="text-danger">{{ form.odometer_reading.errors[0] }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.bill_photo.label(class="form-label") }}
+                        {{ form.bill_photo(class="form-control") }}
+                        {% if form.bill_photo.errors %}
+                            <div class="text-danger">{{ form.bill_photo.errors[0] }}</div>
+                        {% endif %}
+                        <div class="form-text">Upload a new photo to replace the existing one (optional)</div>
+                        {% if expense.bill_photo %}
+                            <div class="form-text text-muted">Current: {{ expense.bill_photo }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('vehi_log.vehi_log_expenses') }}" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Update Expense</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
