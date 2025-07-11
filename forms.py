@@ -10,6 +10,11 @@ from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, IntegerField, FloatField, SelectField, TextAreaField, PasswordField
 from wtforms.validators import DataRequired, Length, NumberRange, Regexp, ValidationError, EqualTo
 from datetime import date, datetime
+from constants import (
+    VEHICLE_TYPE_CHOICES, FUEL_TYPE_CHOICES, POLICY_TYPE_CHOICES, 
+    RTO_OFFICE_CHOICES, DATE_FORMAT, MIN_YEAR, MIN_USERNAME_LENGTH, 
+    MAX_USERNAME_LENGTH, MIN_PASSWORD_LENGTH
+)
 
 
 # =============================================================================
@@ -21,7 +26,7 @@ def validate_date_format(form, field):
     if not field.data:
         raise ValidationError('This field is required.')
     try:
-        datetime.strptime(field.data, '%d/%m/%Y')
+        datetime.strptime(field.data, DATE_FORMAT)
     except (ValueError, TypeError):
         raise ValidationError('Invalid date format. Use dd/mm/yyyy')
 
@@ -30,7 +35,7 @@ def validate_optional_date_format(form, field):
     """Validate date format for optional date fields (dd/mm/yyyy)."""
     if field.data and field.data.strip():
         try:
-            datetime.strptime(field.data, '%d/%m/%Y')
+            datetime.strptime(field.data, DATE_FORMAT)
         except (ValueError, TypeError):
             raise ValidationError('Invalid date format. Use dd/mm/yyyy')
 
@@ -53,72 +58,6 @@ def validate_optional_float(form, field):
             raise ValidationError('Please enter a valid number')
 
 
-# =============================================================================
-# Choice Lists
-# =============================================================================
-
-VEHICLE_TYPE_CHOICES = [
-    ('MCWG', 'Motorcycle with Gear'),
-    ('MCWOG', 'Motorcycle without Gear'),
-    ('LMV', 'Light Motor Vehicle'),
-    ('HMV', 'Heavy Motor Vehicle')
-]
-
-FUEL_TYPE_CHOICES = [
-    ('Petrol', 'Petrol'),
-    ('Diesel', 'Diesel'),
-    ('Electric', 'Electric'),
-    ('CNG', 'CNG')
-]
-
-POLICY_TYPE_CHOICES = [
-    ('', 'Select Policy Type'),
-    ('Comprehensive', 'Comprehensive'),
-    ('Third Party', 'Third Party'),
-    ('Standalone OD', 'Standalone Own Damage')
-]
-
-TN_RTO_OFFICE_CHOICES = [
-    ('', 'Select RTO Office'),
-    ('TN01', 'TN01 - Chennai Central'),
-    ('TN02', 'TN02 - Chennai North'),
-    ('TN03', 'TN03 - Chennai South'),
-    ('TN04', 'TN04 - Chennai West'),
-    ('TN05', 'TN05 - Maduravoyal'),
-    ('TN06', 'TN06 - Ambattur'),
-    ('TN07', 'TN07 - Poonamallee'),
-    ('TN09', 'TN09 - Coimbatore'),
-    ('TN10', 'TN10 - Erode'),
-    ('TN11', 'TN11 - Salem'),
-    ('TN12', 'TN12 - Vellore'),
-    ('TN13', 'TN13 - Krishnagiri'),
-    ('TN14', 'TN14 - Dharmapuri'),
-    ('TN15', 'TN15 - Madurai'),
-    ('TN16', 'TN16 - Dindigul'),
-    ('TN17', 'TN17 - Theni'),
-    ('TN18', 'TN18 - Sivaganga'),
-    ('TN19', 'TN19 - Ramanathapuram'),
-    ('TN20', 'TN20 - Virudhunagar'),
-    ('TN21', 'TN21 - Tirunelveli'),
-    ('TN22', 'TN22 - Tuticorin'),
-    ('TN23', 'TN23 - Kanyakumari'),
-    ('TN24', 'TN24 - Tiruchirapalli'),
-    ('TN25', 'TN25 - Thanjavur'),
-    ('TN26', 'TN26 - Pudukkottai'),
-    ('TN27', 'TN27 - Karur'),
-    ('TN28', 'TN28 - Ariyalur'),
-    ('TN29', 'TN29 - Cuddalore'),
-    ('TN30', 'TN30 - Villupuram'),
-    ('TN31', 'TN31 - Tiruvannamalai'),
-    ('TN32', 'TN32 - Kanchipuram'),
-    ('TN33', 'TN33 - Tiruvallur'),
-    ('TN34', 'TN34 - Nagapattinam'),
-    ('TN35', 'TN35 - Tiruvarur'),
-    ('TN36', 'TN36 - Nilgiris'),
-    ('TN37', 'TN37 - Namakkal'),
-    ('TN38', 'TN38 - Perambalur'),
-    ('TN39', 'TN39 - Tenkasi')
-]
 
 
 # =============================================================================
@@ -157,7 +96,7 @@ class VehicleForm(FlaskForm):
     
     year = IntegerField(
         'Year',
-        validators=[DataRequired(), NumberRange(min=1990, max=date.today().year)],
+        validators=[DataRequired(), NumberRange(min=MIN_YEAR, max=date.today().year)],
         render_kw={"placeholder": "2020"}
     )
     
@@ -209,7 +148,7 @@ class VehicleForm(FlaskForm):
     
     rto_office = SelectField(
         'RTO Office',
-        choices=TN_RTO_OFFICE_CHOICES
+        choices=RTO_OFFICE_CHOICES
     )
     
     rc_expiry_date = StringField(
@@ -418,7 +357,7 @@ class LoginForm(FlaskForm):
     
     username = StringField(
         'Username',
-        validators=[DataRequired(), Length(min=3, max=80)],
+        validators=[DataRequired(), Length(min=MIN_USERNAME_LENGTH, max=MAX_USERNAME_LENGTH)],
         render_kw={"placeholder": "Enter your username"}
     )
     
@@ -434,13 +373,13 @@ class RegistrationForm(FlaskForm):
     
     username = StringField(
         'Username',
-        validators=[DataRequired(), Length(min=3, max=80)],
+        validators=[DataRequired(), Length(min=MIN_USERNAME_LENGTH, max=MAX_USERNAME_LENGTH)],
         render_kw={"placeholder": "Choose a username"}
     )
     
     password = PasswordField(
         'Password',
-        validators=[DataRequired(), Length(min=6)],
+        validators=[DataRequired(), Length(min=MIN_PASSWORD_LENGTH)],
         render_kw={"placeholder": "Choose a strong password"}
     )
     
